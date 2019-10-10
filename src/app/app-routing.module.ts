@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
+  { path: 'forgot', loadChildren: './forgot/forgot.module#ForgotPageModule' },
+  { path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomePageModule' },
 ];
 
 @NgModule({
