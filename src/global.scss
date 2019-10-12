@@ -28,10 +28,15 @@
 
 h1, h2, h3, h4, h5, h6, button, p{
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
 }
 h6{
     line-height: 26px;
     color: var(--main-font-color);
     font-size: 16px;
+    font-weight: 400;
+}
+p{
+    line-height: 28px;
+    color: var(--main-font-color);
+    font-size: 18px;
 }

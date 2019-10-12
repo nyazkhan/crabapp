@@ -1,5 +1,96 @@
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides options="myOptions" pager="false" slider="mySlide[item.id]">
+
+
+
+      <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+          <h6 class="ion-text-center ion-margin-bottom">Accommodation Size</h6>
+          <br>
+          <br>
+          <ion-row>
+            <ion-col class="ion-margin-top">
+              <div class="round-box" style="margin: auto">
+                <img class="img-logo" src="assets/tables.svg">
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <br>
+          <br>
+    
+          <p>10 - 20 People at a time</p>
+
+          <ion-item lines="none" color="undefine">
+            <ion-range min="10" max="50" step="10" value="10" snaps color="danger">
+            </ion-range>
+          </ion-item>
+    
+          <ion-row>
+            <ion-col padding>
+              <div class="fixed-btn">
+                <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-slide>
+
+
+
+
+      <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+          <h6 class="ion-text-center ion-margin-bottom">Restaurent Name</h6>
+          <br><br><br><br><br><br><br><br>
+    
+         <div>
+            <p>CHAI SUTTA BAR AHMEDABAD</p>
+         </div>
+
+          <ion-row>
+            <ion-col padding>
+              <div class="fixed-btn">
+                <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+    
+        </ion-slide>
+
+
+
+
+
+
+
+
+      <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+          <h6 class="ion-text-center ion-margin-bottom">Average cost per person</h6>
+          <br><br><br><br><br><br><br><br><br><br><br><br>
+    
+          <ion-row>
+            <ion-col padding>
+              <ion-item lines="none" color="undefine" class="full-border">
+                <ion-label class="lable-font">150 INR</ion-label>
+                <ion-select>
+                  <ion-select-option value="cat">200 INR</ion-select-option>
+                  <ion-select-option value="dog">150 INR</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col padding>
+              <div class="fixed-btn">
+                <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+    
+        </ion-slide>
+
+
+
+
 
 
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
@@ -211,13 +302,13 @@
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img class="img-veg" src="assets/veg.svg">
+            <img id="myimg" class="img-veg" src="assets/veg.svg">
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row class="list tab-menu">
-        <ion-col class="item font-active">Veg</ion-col>
+        <ion-col class="item font-active"><span id="img_show">Veg</span></ion-col>
         <ion-col class="item">Non - Veg</ion-col>
         <ion-col class="item">Both</ion-col>
       </ion-row>

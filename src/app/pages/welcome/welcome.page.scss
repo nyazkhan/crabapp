@@ -22,7 +22,7 @@ ion-button.full-with-btn{
     background-color: var(--main-font-color);
     color: #fff;
     font-size: 12px;
-    height: 40px;
+    height: 45px;
     border: 1px solid var(--main-font-color);
     border-radius: 4px;
     position:fixed;
@@ -123,4 +123,10 @@ ion-button.full-with-btn{
     color: var(--main-font-color);
     font-size: 15px;
     font-weight: 500;
+}
+ion-range {
+    --pin-background: black;
+    --pin-color: red;
+    width: var(--knob-handle-size);
+    height: var(--knob-handle-size);
 }
