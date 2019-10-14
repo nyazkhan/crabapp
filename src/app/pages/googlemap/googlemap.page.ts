@@ -66,7 +66,7 @@ export class GooglemapPage implements OnInit {
     const searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {
       types: ['(restaurant)'], componentRestrictions: { country: 'In' }
     });
-    // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.input);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.input);
 
     // Bias the SearchBox results towards current map's viewport.
     this.map.addListener('bounds_changed', () => {
