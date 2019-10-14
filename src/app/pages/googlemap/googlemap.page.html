@@ -6,12 +6,50 @@
 
 <ion-content>
   <div id="locationField">
-    <input id="autocomplete" placeholder="Enter a city"  type="text" />
+    <input id="autocomplete" placeholder="Search and set location of your restaurant" type="text" />
   </div>
   <div #map id="map"></div>
-  <!-- <div id="listing">
+  <div id="listing">
     <table id="resultsTable">
       <tbody id="results"></tbody>
     </table>
-  </div> -->
+  </div>
+
+  <div class="map-setting-part">
+
+    <div>
+      <p style="font-weight: bold;">CHAI SUTTA BAR AHMEDABAD</p>
+
+      <h6 class="ion-text-left" style="font-size: 14px;">
+        (Onyx Complex SV Desai Marg, H.L College road, Gulbai Tekra, Ahmedabad, Gujarat 380009.
+      </h6>
+
+      <br>
+
+
+      <ion-item class="stylist-input" lines="none" color="undefine">
+        <ion-label slot="end">Premise No. / Name</ion-label>
+        <ion-input class="opacity-1" placeholder="G - 5 Onyx Complex"></ion-input>
+      </ion-item>
+
+      <ion-item class="stylist-input" lines="none" color="undefine">
+          <ion-label slot="end">Locality</ion-label>
+          <ion-input class="opacity-1" placeholder="Gulbai Tekra"></ion-input>
+        </ion-item>
+
+        <ion-item class="stylist-input" lines="none" color="undefine">
+            <ion-label slot="end">Landmark</ion-label>
+            <ion-input class="opacity-1" placeholder="near reliance fresh"></ion-input>
+          </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">SET LOCATION</ion-button>
+        </ion-col>
+      </ion-row>
+
+
+    </div>
+
+  </div>
 </ion-content>

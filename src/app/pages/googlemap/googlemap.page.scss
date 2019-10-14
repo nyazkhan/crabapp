@@ -1,20 +1,6 @@
 
-.hotel-search {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: #fff;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 440px;
-    z-index: 1;
-  }
+
   #map {
-    margin-top: 40px;
     width: 440px;
     height: 100%;
   }
@@ -43,5 +29,39 @@
     flex: 1 1 140px;
   }
   #autocomplete {
-    width: 100%;
+    width: 75%;
+    padding: 10px;
+    font-size: 15px;
+    top: 20px !important;
+    position: absolute !important;
+    border: 1px solid white;
+    left: 5% !important;
+    right: 5% !important;
   }  
+  ::placeholder{
+    color: #c44829;
+  }
+  input:focus{
+    outline:none !important;
+  }
+  .map-setting-part{
+    background-color: #ffeee0;
+    padding: 20px 30px;
+  }
+  .stylist-input{
+    border: 1px solid #f1d7d7;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--main-font-color);
+    margin-bottom: 20px;
+  }
+ion-button.full-with-btn{
+    background-color: var(--main-font-color);
+    color: #fff;
+    font-size: 12px;
+    height: 45px;
+    border: 1px solid var(--main-font-color);
+    border-radius: 4px;
+    width: 100%;
+}
+.opacity-1{--placeholder-opacity: 1  !important;}

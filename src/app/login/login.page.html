@@ -53,42 +53,62 @@
 
     </ion-card> -->
 
-    
-    <ion-row class="row">
-      <div class="fire-logo">
+
+    <ion-row padding class="row login-screen">
+      <div padding class="login-screen-content">
         <!-- <ion-text class="ion-text-left" > -->
 
-          <h2 class=" btn-color  ion-no-margin  ion-margin-vertical">
-            OTP recive on</h2>
-          <ion-row>
-            <ion-col>
-
-              <p> 9017697290 </p>
-            </ion-col>
-            <ion-col>
-              <h3>change</h3>
-            </ion-col>
-          </ion-row>
-
+        <p class="bold">OTP recive on</p>
+        <ion-row>
+          <ion-col>
+            <ion-text class="block btn-color"><span class="ion-float-left">+91 8925014789</span>
+              <span style="float: right;" class="btn-color" routerLink="/signup">Change</span></ion-text>
+          </ion-col>
+        </ion-row>
         <!-- </ion-text> -->
 
-        <img src="assets/chat.svg" class="img-logo">
+        <br>
+        <br>
 
-        <h2 style="font-size: large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical">
-          Enter 6 digit OTP </h2>
+
         <ion-row>
+          <ion-col class="all-content-center">
+            <img src="assets/massage_icon.svg" class="img-logo" style="height: 75%;">
+          </ion-col>
+        </ion-row>
+
+        <br>
+
+
+        <p class="ion-text-center bold">Enter 6 Digit OTP Received</p>
+
+        <br>
+
+
+        <!-- <ion-row>
           <ion-col>
             <ion-input clearInput type="tel" placeholder="Mobile No" [(ngModel)]="phoneNo"
               class="input ion-margin-vertical ion-padding-horizontal" clear-input="true">
               <ion-icon size="large" color="undefine" style="color: #996452" name="phone-portrait"></ion-icon>
             </ion-input>
           </ion-col>
-        </ion-row>
-        <ion-row>
+        </ion-row> -->
+        <ion-item class="stylist-input" lines="none" color="undefine">
+          <ion-label slot="end">OTP</ion-label>
+          <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
+        </ion-item>
+
+        <!-- <ion-row>
           <ion-col>
             <ion-button expand="block" (click)="login()" color="undefined" class="transition">
               <strong class="white">
                 Send OTP</strong></ion-button>
+          </ion-col>
+        </ion-row> -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn  mt-20 transition">Send
+              OTP</ion-button>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -96,18 +116,14 @@
             <ion-text class="error ion-text-center">{{error}}</ion-text>
           </ion-col>
         </ion-row>
+        <br>
         <ion-row>
           <ion-col>
-            <ion-text class="ion-text-center block btn-color">Already have an Acount ?
-              <span class="bold btn-color" routerLink="/signup">SIGN IN</span></ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-text class="ion-text-center block bold btn-color" routerLink="/forgot">Forgot Password</ion-text>
+            <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in 60 seconds</span>
+              <span style="float: right;" class="bold btn-color" routerLink="/signup"><img src="assets/refresh.svg" class="img-logo"> RESEND OTP</span></ion-text>
           </ion-col>
         </ion-row>
       </div>
-    </ion-row> 
+    </ion-row>
   </div>
 </ion-content>
