@@ -9,6 +9,7 @@ import { LoginPage } from './login.page';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule
   ],
+  providers: [FirebaseAuthentication],
   declarations: [LoginPage]
 })
-export class LoginPageModule {}
+export class LoginPageModule { }
