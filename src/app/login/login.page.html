@@ -2,8 +2,10 @@
 
 
   <div class="main ion-no-margin">
-    <ion-card class="ion-no-margin">
+    <!-- <ion-card class="ion-no-margin">
       <ion-card-content>
+        <div  id="recaptcha"></div>
+
         <ion-row>
           <ion-col class="fire-logo">
 
@@ -29,12 +31,11 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" (click)="login()" color="undefined" (click)="onSignInSubmit()"
+            <ion-button expand="block"  color="undefined" (click)="onSignInSubmit()"
               class="transition">
               <strong class="white">
                 Send OTP</strong></ion-button>
-                <div id="recaptcha-container"></div>
-              </ion-col>
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -47,19 +48,15 @@
               <span class="bold btn-color" routerLink="/signup">SIGN IN</span></ion-text>
           </ion-col>
         </ion-row>
-        <!-- <ion-row>
-          <ion-col>
-            <ion-text class="ion-text-center block bold btn-color" routerLink="/forgot">Forgot Password</ion-text>
-          </ion-col>
-        </ion-row> -->
+    
       </ion-card-content>
 
-    </ion-card>
+    </ion-card> -->
 
-    <!-- 
+    
     <ion-row class="row">
       <div class="fire-logo">
-        <ion-text class="ion-text-left" >
+        <!-- <ion-text class="ion-text-left" > -->
 
           <h2 class=" btn-color  ion-no-margin  ion-margin-vertical">
             OTP recive on</h2>
@@ -73,7 +70,7 @@
             </ion-col>
           </ion-row>
 
-        </ion-text>
+        <!-- </ion-text> -->
 
         <img src="assets/chat.svg" class="img-logo">
 
@@ -111,6 +108,6 @@
           </ion-col>
         </ion-row>
       </div>
-    </ion-row> -->
+    </ion-row> 
   </div>
 </ion-content>

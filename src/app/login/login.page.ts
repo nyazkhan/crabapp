@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+// import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,38 +14,60 @@ export class LoginPage implements OnInit {
   phoneNo = '';
   error: any;
 
+  // @ViewChild('recaptchacontainer', { static: false }) recaptcha: ElementRef;
+  varificationId: any;
 
 
-
-  recaptchaVerifier: any;
-  recaptchaWidgetId: any;
+  public recaptchaVerifier: firebase.auth.RecaptchaVerifier; recaptchaWidgetId: any;
   confirmationResult: firebase.auth.ConfirmationResult;
+  isApp: boolean;
+  otp: number;
   constructor(
-    @Inject(AngularFireAuth) private firebaseAuth: AngularFireAuth,
+    @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
+    // private fireAuth: FirebaseAuthentication,
     @Inject(Router) private router: Router,
     private toastController: ToastController,
     public loadingController: LoadingController,
     public alertController: AlertController) {
 
 
-    this.firebaseAuth.auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        const uid = user.uid;
-        const email = user.email;
-        const photoURL = user.photoURL;
-        const phoneNumber = user.phoneNumber;
-        const isAnonymous = user.isAnonymous;
-        const displayName = user.displayName;
-        const providerData = user.providerData;
-        const emailVerified = user.emailVerified;
-      }
+    // this.angularFire.onAuthStateChanged().subscribe((user) => {
+    //   if (user) {
+    //     // User is signed in.
+    //     const uid = user.uid;
+    //     const email = user.email;
+    //     const photoURL = user.photoURL;
+    //     const phoneNumber = user.phoneNumber;
+    //     const isAnonymous = user.isAnonymous;
+    //     const displayName = user.displayName;
+    //     const providerData = user.providerData;
+    //     const emailVerified = user.emailVerified;
+    //   }
 
-    });
+    // });
 
 
 
   }
+
+
+
+
+  // login() {
+  //   this.firebaseAuthentication.verifyPhoneNumber('+919017697290', 30000).then((varificationId) => {
+  //     this.varificationId = varificationId;
+  //   }).catch((error) => {
+
+  //   });
+  // }
+
+  // signInWhitOTP() {
+  //   this.firebaseAuthentication.signInWithVerificationId(this.varificationId, this.otp).then((res) => {
+
+  //   }).catch((error) => {
+
+  //   });
+  // }
 
 
   async openLoader() {
@@ -57,25 +80,30 @@ export class LoginPage implements OnInit {
   async closeLoading() {
     return await this.loadingController.dismiss();
   }
-
-  login() {
-
-  }
   onSignInSubmit() {
     console.log('its call');
     const appVerifier = this.recaptchaVerifier;
-    this.firebaseAuth.auth.signInWithPhoneNumber('+' + this.phoneNo, appVerifier)
+    this.angularFire.auth.settings.appVerificationDisabledForTesting = true;
+    // this.recaptchaVerifier.verify().then((widgetId) => {
+    //   // this.recaptchaWidgetId =
+    //   console.log(widgetId);
+    // });
+    this.angularFire.auth.signInWithPhoneNumber('+' + this.phoneNo, appVerifier)
       .then((confirmationResult) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
         this.confirmationResult = confirmationResult;
-        return confirmationResult.confirm('908777');
+        const code = window.prompt('Please enter your code');
+        return confirmationResult.confirm(code);
 
-        console.log(this.confirmationResult);
+
+      }).then(() => {
 
       }).catch((error) => {
         // Error; SMS not sent
         // ...
+        console.log('wrong opt');
+
       });
   }
   ionViewDidEnter() {
@@ -85,11 +113,21 @@ export class LoginPage implements OnInit {
     //     this.onSignInSubmit();
     //   }
     // });
-    this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha',
+      {
+        size: 'invisible', callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          console.log(response);
+
+          this.onSignInSubmit();
+        }
+      });
 
     // [END appVerifier]
-    // this.recaptchaVerifier.render().then((widgetId) => {
-    //   this.recaptchaWidgetId = widgetId;
+    // this.recaptchaVerifier.clear();
+    // verify().then((widgetId) => {
+    //   // this.recaptchaWidgetId =
+    //   console.log(widgetId);
     // });
   }
   async presentToast(Message, showbutton, Position, Duration) {
@@ -105,4 +143,7 @@ export class LoginPage implements OnInit {
 
   }
 
+  login() {
+
+  }
 }
