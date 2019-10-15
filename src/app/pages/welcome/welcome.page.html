@@ -96,7 +96,7 @@
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
       <h6 class="ion-text-center ion-margin-bottom">Restaurant timing</h6>
       <br>
-      <div padding style="display:flex">
+      <div padding style="display:flex" class="all-content-center">
         <ion-button size="small" color="undefine" class="day-square-btn">S</ion-button>
         <ion-button size="small" color="undefine" class="day-square-btn">M</ion-button>
         <ion-button size="small" color="undefine" class="day-square-btn">T</ion-button>
@@ -109,15 +109,12 @@
       <ion-row>
         <ion-col size="5">
           <ion-item lines="none" color="undefine" class="full-border">
-            <ion-label class="lable-font">09:30 AM</ion-label>
-            <ion-select>
-              <ion-select-option value="cat">Time 1</ion-select-option>
-              <ion-select-option value="dog">Time 2</ion-select-option>
-            </ion-select>
+
+          <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
           </ion-item>
         </ion-col>
 
-        <ion-col size="2">
+        <ion-col size="2" style="padding: 0;">
           <ion-item lines="none" color="undefine">
             <ion-label class="ion-text-center lable-font">to</ion-label>
           </ion-item>
@@ -125,11 +122,7 @@
 
         <ion-col size="5">
           <ion-item lines="none" color="undefine" class="full-border">
-            <ion-label class="lable-font">09:30 AM</ion-label>
-            <ion-select>
-                <ion-select-option value="cat">Time 1</ion-select-option>
-                <ion-select-option value="dog">Time 2</ion-select-option>
-            </ion-select>
+            <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
           </ion-item>
         </ion-col>
 
@@ -141,16 +134,21 @@
       <ion-row>
           <ion-col size="10">
             <ion-item lines="none" color="undefine" class="full-border">
-              <ion-label class="lable-font">09:30 AM</ion-label>
-              <ion-select>
-                <ion-select-option value="cat">Time 1</ion-select-option>
-                <ion-select-option value="dog">Time 2</ion-select-option>
-              </ion-select>
+              <ion-select placeholder="Please Select State" class="main-color">
+                <ion-select-option value="Sunday" [selected]="true">Sunday</ion-select-option>
+                <ion-select-option value="Monday">Monday</ion-select-option>
+                <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+                <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+                <ion-select-option value="Thursday">Thursday</ion-select-option>
+                <ion-select-option value="Friday">Friday</ion-select-option>
+                <ion-select-option value="Saturday">Saturday</ion-select-option>
+            </ion-select>
             </ion-item>
           </ion-col>
   
           <ion-col size="2">
-            <ion-item lines="none" color="undefine" class="full-border">
+            <ion-item lines="none" color="undefine" class="full-border" style="display: grid;
+            justify-content: center;">
               <ion-label class="lable-font"><ion-icon name="close"></ion-icon></ion-label>
             </ion-item>
           </ion-col>
@@ -159,15 +157,11 @@
         <ion-row>
             <ion-col size="5">
               <ion-item lines="none" color="undefine" class="full-border">
-                <ion-label class="lable-font">09:30 AM</ion-label>
-                <ion-select>
-                  <ion-select-option value="cat">Time 1</ion-select-option>
-                  <ion-select-option value="dog">Time 2</ion-select-option>
-                </ion-select>
+                <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
               </ion-item>
             </ion-col>
     
-            <ion-col size="2">
+            <ion-col size="2" style="padding: 0;">
               <ion-item lines="none" color="undefine">
                 <ion-label class="ion-text-center lable-font">to</ion-label>
               </ion-item>
@@ -175,11 +169,7 @@
     
             <ion-col size="5">
               <ion-item lines="none" color="undefine" class="full-border">
-                <ion-label class="lable-font">09:30 AM</ion-label>
-                <ion-select>
-                    <ion-select-option value="cat">Time 1</ion-select-option>
-                    <ion-select-option value="dog">Time 2</ion-select-option>
-                </ion-select>
+                <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
               </ion-item>
             </ion-col>
           </ion-row>
