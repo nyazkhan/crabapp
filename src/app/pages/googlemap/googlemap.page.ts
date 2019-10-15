@@ -42,6 +42,8 @@ export class GooglemapPage implements OnInit {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
         mapTypeControl: false,
+        // scaleControl: false,
+        fullscreenControl: false
       };
       this.initAutocomplete();
     }, (err) => {

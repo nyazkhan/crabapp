@@ -1,8 +1,7 @@
 {
   "name": "crabapp",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -1,7 +1,7 @@
 
 
   #map {
-    width: 440px;
+    // width: 440px;
     height: 100%;
   }
   #listing {
@@ -33,10 +33,11 @@
     padding: 10px;
     font-size: 15px;
     top: 20px !important;
-    position: absolute !important;
+    // position: absolute !important;
     border: 1px solid white;
-    left: 5% !important;
-    right: 5% !important;
+    // left: 5% !important;
+    // right: 5% !important;
+    color: var(--main-font-color);
   }  
   ::placeholder{
     color: #c44829;
