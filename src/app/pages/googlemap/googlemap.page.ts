@@ -1,4 +1,3 @@
-
 import { Component, NgZone, ElementRef, ViewChild, Inject, AfterViewInit, OnInit } from '@angular/core';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
 declare const google: any;
@@ -41,11 +40,12 @@ export class GooglemapPage implements OnInit {
         center: this.latLng,
         zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-
+        streetViewControl: false,
+        mapTypeControl: false,
       };
       this.initAutocomplete();
     }, (err) => {
-      alert('err ' + err);
+      console.log(err);
     });
 
 
@@ -66,7 +66,7 @@ export class GooglemapPage implements OnInit {
     const searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {
       types: ['(restaurant)'], componentRestrictions: { country: 'In' }
     });
-    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.input);
+    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.input);
 
     // Bias the SearchBox results towards current map's viewport.
     this.map.addListener('bounds_changed', () => {
@@ -171,7 +171,7 @@ export class GooglemapPage implements OnInit {
       //   });
       // this.initAutocomplete();
     }, (err) => {
-      alert('err ' + err);
+      console.log(err);
     });
 
   }
