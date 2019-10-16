@@ -355,15 +355,15 @@
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img id="myimg" class="img-veg" src="assets/veg.svg">
+            <img class="img-veg" src="assets/veg.svg">
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row class="list tab-menu">
-        <ion-col class="item font-active"><span id="img_show">Veg</span></ion-col>
-        <ion-col class="item">Non - Veg</ion-col>
-        <ion-col class="item">Both</ion-col>
+        <ion-col (click)="addClass(1)" [ngClass]="(active===1)?'item':'item font-active'">Veg</ion-col>
+        <ion-col (click)="addClass(2)" [ngClass]="(active===2)?'item':'item font-active'">Non - Veg</ion-col>
+        <ion-col (click)="addClass(3)" [ngClass]="(active===3)?'item':'item font-active'">Both</ion-col>
       </ion-row>
 
       <ion-row>

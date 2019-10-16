@@ -1,39 +1,36 @@
 <ion-content class="ion-no-padding">
 
 
-  <div class="main ion-no-margin">
-    <ion-card class="ion-no-margin">
-      <ion-card-content>
+  <div class="main ion-no-margin"  style="background-color: #ffeee0;">
+    <ion-row padding class="ion-no-margin">
+      <ion-col padding>
         <div id="recaptcha"></div>
 
         <ion-row>
           <ion-col class="fire-logo">
 
-            <h2 style="font-size: xx-large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical">
-              Welcome to CRAB</h2>
+            <h1 style="font-size: xx-large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical" style="margin: 0 !important;">
+              Welcome to CRAB</h1>
 
             <img src="assets/welcome.png" class="img-logo">
 
-            <h2 style="font-size: large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical">
-              Creat A New Account
-            </h2>
+            <p style="font-size: 18px !important" class="ion-text-center bold">Create A New Account</p>
 
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-input clearInput type="tel" placeholder="Mobile No" [(ngModel)]="phoneNo"
-              class="input ion-margin-vertical ion-padding-horizontal" clear-input="true">
-              <ion-icon size="large" color="undefine" style="color: #996452" name="phone-portrait"></ion-icon>
-            </ion-input>
+            <ion-item class="stylist-input" lines="none" color="undefine">
+              <ion-label slot="start">+91 8925014789</ion-label>
+              <ion-input class="opacity-1" placeholder="Mobile Number"></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" color="undefined" (click)="onSignInSubmit()" class="transition">
-              <strong class="white">
-                Send OTP</strong></ion-button>
+            <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn  mt-20 transition">Send
+              OTP</ion-button>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -48,9 +45,9 @@
           </ion-col>
         </ion-row>
 
-      </ion-card-content>
+      </ion-col>
 
-    </ion-card>
+    </ion-row>
 
 
     <ion-row padding class="row login-screen">
