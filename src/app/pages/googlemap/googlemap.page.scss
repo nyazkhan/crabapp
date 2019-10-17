@@ -40,10 +40,14 @@
     color: var(--main-font-color);
   }  
   ::placeholder{
-    color: #c44829;
+    color: #a52303;
   }
   input:focus{
     outline:none !important;
+  }
+  .input {
+    background-color: #ffffff;
+
   }
   .map-setting-part{
     background-color: #ffeee0;
