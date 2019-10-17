@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-welcome',
@@ -183,9 +185,48 @@ export class WelcomePage implements OnInit {
       }
     }
   };
-  constructor() { }
+  Restaurent_Id: any;
+  active: any;
+  constructor(
+
+    @Inject(Router) private router: Router,
+    @Inject(AngularFirestore) private firestore: AngularFirestore,
+    @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
+
+  ) {
+    this.subscribeRouteChanges();
+  }
 
   ngOnInit() {
   }
+  subscribeRouteChanges() {
 
+    this.activatedRoute.queryParams
+      .subscribe((e: Params) => {
+        // tslint:disable-next-line: radix
+
+        console.log(e);
+
+        this.Restaurent_Id = e.restaurent;
+        this.getRestaurentById(this.Restaurent_Id);
+
+
+      }, (err: any) => {
+        // this.router.navigate(['/process']);
+      });
+
+  }
+  getRestaurentById(id) {
+    this.firestore.collection('Restaurent').doc(id).get().subscribe(doc => {
+      console.log(doc.data());
+
+
+    });
+  }
+
+
+
+  addClass(val) {
+    this.active = val;
+  }
 }

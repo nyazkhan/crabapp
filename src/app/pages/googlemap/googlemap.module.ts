@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { GooglemapPage } from './googlemap.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { PopoverPage } from './address-popover/address-popover';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {
@@ -20,9 +22,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    AngularFirestoreModule,
     RouterModule.forChild(routes)
   ],
-  providers: [Geolocation,],
-  declarations: [GooglemapPage]
+  declarations: [GooglemapPage, PopoverPage],
+  entryComponents: [PopoverPage],
+  providers: [Geolocation],
 })
 export class GooglemapPageModule { }

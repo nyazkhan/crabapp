@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
   confirmationResult: firebase.auth.ConfirmationResult;
   isApp: boolean;
   otp: number;
+  phone: string;
   constructor(
     @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
     // private fireAuth: FirebaseAuthentication,
@@ -50,7 +51,26 @@ export class LoginPage implements OnInit {
 
   }
 
+  // send() {
+  //   const tell = '+91' + this.phone;
+  //   (<any> window).FirebasePlugin.verifyPhoneNumber(tell, 60, (credential) => {
+  //     console.log(credential);
+  //     this.verificationId = credential.verificationId;
+  //   }, (error) => {
+  //     console.error(error);
+  //     alert(error);
+  //    });
+  // }
 
+  // verify() {
+  //   const signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, this.code);
+  //   firebase.auth().signInWithCredential(signInCredential).then((info) => {
+  //     console.log(info);
+  //     // this.navCtrl.navigateRoot('/home');
+  //   }, (error) => {
+  //     console.log(error);
+  //   });
+  //   }
 
 
   // login() {
