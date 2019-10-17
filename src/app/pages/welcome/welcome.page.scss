@@ -86,10 +86,11 @@ ion-button.full-with-btn{
 //     transition: .6s ease;
 // }
 .font-active{
-    transform: scale(1.4);
+    font-size:21px !important;
     font-weight: bold !important;
     opacity: 1 !important;
     transition: .6s ease;
+
 }
 
 
@@ -135,4 +136,15 @@ ion-range {
     --pin-color: red;
     width: var(--knob-handle-size);
     height: var(--knob-handle-size);
+}
+
+.img-veg{
+  display: none;
+}
+.img-non-veg{
+  display: none;
+}
+.menu-1:hover .img-veg{
+display: block;
+border:1px solid red
 }

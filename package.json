@@ -79,7 +79,9 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-firebase-authentication": {},
+      "cordova-plugin-firebase-authentication": {
+        "FIREBASE_AUTH_VERSION": "18.0.+"
+      },
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },

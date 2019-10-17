@@ -24,3 +24,13 @@ const routes: Routes = [
   declarations: [WelcomePage]
 })
 export class WelcomePageModule {}
+
+
+
+
+// $(document).ready(function(){
+//   $("ion-row ion-col").click(function(){
+//     $('ion-col').removeClass("font-active");
+//     $(this).addClass("font-active");
+// });
+// });
