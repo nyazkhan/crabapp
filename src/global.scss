@@ -26,6 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+.main-background{
+    --background: #ffeee0;
+}
 h1, h2, h3, h4, h5, h6, button, p{
     font-family: 'Roboto', sans-serif;
 }
@@ -39,4 +42,7 @@ p{
     line-height: 28px;
     color: var(--main-font-color);
     font-size: 18px;
+}
+.main-color{
+    color:var(--main-font-color) !important;
 }

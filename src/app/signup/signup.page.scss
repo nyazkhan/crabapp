@@ -4,20 +4,18 @@
 .bold {
     font-weight: 500;
   }
-.login-screen{
-    padding-top: 30px;
+.signup-screen{
     display: block;
-    background-color: #ffeee0;
-    height: 100vh;
   }
   ion-button.full-with-btn{
     background-color: var(--main-font-color);
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     height: 45px;
     border: 1px solid var(--main-font-color);
     border-radius: 4px;
     width: 100%;
+    letter-spacing: 1px;
 }
 .stylist-input{
   border: 1px solid #f1d7d7;
