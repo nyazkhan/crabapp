@@ -186,6 +186,7 @@ export class WelcomePage implements OnInit {
     }
   };
   Restaurent_Id: any;
+  active: any;
   constructor(
 
     @Inject(Router) private router: Router,
@@ -221,5 +222,11 @@ export class WelcomePage implements OnInit {
 
 
     });
+  }
+
+
+
+  addClass(val) {
+    this.active = val;
   }
 }

@@ -137,14 +137,6 @@ ion-range {
     width: var(--knob-handle-size);
     height: var(--knob-handle-size);
 }
-
-.img-veg{
-  display: none;
-}
-.img-non-veg{
-  display: none;
-}
-.menu-1:hover .img-veg{
-display: block;
-border:1px solid red
+ion-select{
+    display: contents;
 }

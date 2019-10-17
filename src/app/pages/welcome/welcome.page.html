@@ -4,25 +4,63 @@
 
 
 
+    <!-- about restaurent -->
+    <ion-slide padding class="all-content-center">
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <div class="round-box-dark" style="margin: auto">
+            <img style="width: 65%" src="assets/Illustration.svg">
+          </div>
+          <br>
+          <h6 padding>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+          </h6>
+        </ion-col>
+      </ion-row>
+
+    </ion-slide>
 
 
+
+
+    <!-- Restaurent Name -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <h6 class="ion-text-center ion-margin-bottom">Restaurent Name</h6>
+      <br><br><br><br><br><br><br><br>
+
+      <div>
+        <ion-input type="text" class="bold"></ion-input>
+      </div>
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-slide>
+
+
+    <!-- Food served in restaurant is -->
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      
       <h6 class="ion-text-center ion-margin-bottom">Food served in restaurant is</h6>
       <br>
       <br>
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img class="img-veg" src="assets/veg.svg">
-            <img class="img-non-veg" src="assets/veg.svg">
+            <img  class="img-veg" src="assets/veg.svg">
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row class="list tab-menu">
-        <ion-col class="item menu-1 font-active">Veg</ion-col>
-        <ion-col class="item">Non - Veg</ion-col>
-        <ion-col class="item">Both</ion-col>
+        <ion-col (click)="addClass(1)" [ngClass]="(active===1)?'item font-active':'item '">Veg</ion-col>
+        <ion-col (click)="addClass(2)" [ngClass]="(active===2)?'item font-active':'item '">Non - Veg</ion-col>
+        <ion-col (click)="addClass(3)" [ngClass]="(active===3)?'item font-active':'item '">Both</ion-col>
       </ion-row>
 
       <ion-row>
@@ -45,52 +83,124 @@
 
 
 
-
-
-
-
-
+    <!-- Type of Restaurant -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Accommodation Size</h6>
+      <h6 class="ion-text-center ion-margin-bottom">Type of Restaurant</h6>
       <br>
       <br>
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img class="img-logo" src="assets/tables.svg">
+            <img class="img-logo" src="assets/cafe.svg">
           </div>
         </ion-col>
       </ion-row>
 
+      <ion-row class="list tab-menu">
+        <ion-col class="item font-active">Cafe</ion-col>
+        <ion-col class="item">Restaurent</ion-col>
+        <ion-col class="item">Both</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+
+    <!-- Payment Options -->
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <h6 class="ion-text-center ion-margin-bottom">Payment Options</h6>
       <br>
       <br>
-
-      <p>10 - 20 People at a time</p>
-
-      <ion-item lines="none" color="undefine">
-        <ion-range min="10" max="50" step="10" value="10" snaps color="danger">
-        </ion-range>
-      </ion-item>
-
       <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+        <ion-col class="ion-margin-top">
+          <div class="round-box" style="margin: auto">
+            <img class="img-veg" src="assets/cash.svg">
           </div>
         </ion-col>
       </ion-row>
+      <br>
+      <ion-row>
+        <ion-col>
+          <ion-item-sliding padding>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Cash</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Credit / Debit Card</ion-label>
+              <ion-toggle slot="end" color="danger"></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Paytm</ion-label>
+              <ion-toggle slot="end" color="danger"></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">
+                UPI Payment
+                <br>
+                <p style="font-size: 12px;margin-top:5px;">Google pay / Phonepay / Paytm UPI etc</p>
+              </ion-label>
+              <ion-toggle slot="end" color="danger"></ion-toggle>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+          <ion-col padding>
+            <div class="fixed-btn">
+              <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            </div>
+          </ion-col>
+        </ion-row> -->
     </ion-slide>
 
 
 
-
+    <!-- You are open on -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Restaurent Name</h6>
-      <br><br><br><br><br><br><br><br>
-
-      <div>
-        <p class="bold">CHAI SUTTA BAR AHMEDABAD</p>
-      </div>
+      <h6 class="ion-text-center">You are open on</h6>
+      <br>
+      <br>
+      <ion-row>
+        <ion-col>
+          <ion-item-sliding padding>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Monday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Tuesday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Wednesday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Thursday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Friday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Saturday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">Sunday</ion-label>
+              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-col>
+      </ion-row>
 
       <ion-row>
         <ion-col padding>
@@ -99,46 +209,12 @@
           </div>
         </ion-col>
       </ion-row>
-
     </ion-slide>
 
 
 
 
-
-
-
-
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Average cost per person</h6>
-      <br><br><br><br><br><br><br><br><br><br><br><br>
-
-      <ion-row>
-        <ion-col padding>
-          <ion-item lines="none" color="undefine" class="full-border">
-            <ion-label class="lable-font">150 INR</ion-label>
-            <ion-select>
-              <ion-select-option value="cat">200 INR</ion-select-option>
-              <ion-select-option value="dog">150 INR</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-
-    </ion-slide>
-
-
-
-
-
+    <!-- Restaurant timing -->
 
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
       <h6 class="ion-text-center ion-margin-bottom">Restaurant timing</h6>
@@ -197,7 +273,7 @@
 
         <ion-col size="2">
           <ion-item lines="none" color="undefine" class="full-border" style="display: grid;
-            justify-content: center;">
+          justify-content: center;">
             <ion-label class="lable-font">
               <ion-icon name="close"></ion-icon>
             </ion-label>
@@ -245,73 +321,7 @@
 
 
 
-
-
-    <ion-slide padding class="all-content-center">
-      <ion-row>
-        <ion-col class="ion-margin-top">
-          <div class="round-box-dark" style="margin: auto">
-            <img style="width: 65%" src="assets/Illustration.svg">
-          </div>
-          <br>
-          <h6 padding>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-          </h6>
-        </ion-col>
-      </ion-row>
-
-    </ion-slide>
-
-
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Payment Options</h6>
-      <br>
-      <br>
-      <ion-row>
-        <ion-col class="ion-margin-top">
-          <div class="round-box" style="margin: auto">
-            <img class="img-veg" src="assets/cash.svg">
-          </div>
-        </ion-col>
-      </ion-row>
-      <br>
-      <ion-row>
-        <ion-col>
-          <ion-item-sliding padding>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Cash</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Credit / Debit Card</ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Paytm</ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">
-                UPI Payment
-                <br>
-                <p style="font-size: 12px;margin-top:5px;">Google pay / Phonepay / Paytm UPI etc</p>
-              </ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
-            </ion-item>
-          </ion-item-sliding>
-        </ion-col>
-      </ion-row>
-      <!-- <ion-row>
-            <ion-col padding>
-              <div class="fixed-btn">
-                <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
-              </div>
-            </ion-col>
-          </ion-row> -->
-    </ion-slide>
-
-
-
+    <!-- Parking Area -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
       <h6 class="ion-text-center ion-margin-bottom">Parking Area</h6>
       <br>
@@ -349,84 +359,28 @@
 
 
 
+    <!-- Accommodation size -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center">You are open on</h6>
-      <br>
-      <br>
-      <ion-row>
-        <ion-col>
-          <ion-item-sliding padding>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Monday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Tuesday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Wednesday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Thursday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Friday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Saturday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Sunday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
-            </ion-item>
-          </ion-item-sliding>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-
-
-
-
-
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Food served in restaurant is</h6>
+      <h6 class="ion-text-center ion-margin-bottom">Accommodation Size</h6>
       <br>
       <br>
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img class="img-veg" src="assets/veg.svg">
+            <img class="img-logo" src="assets/tables.svg">
           </div>
         </ion-col>
       </ion-row>
 
-      <ion-row class="list tab-menu">
-        <ion-col (click)="addClass(1)" [ngClass]="(active===1)?'item':'item font-active'">Veg</ion-col>
-        <ion-col (click)="addClass(2)" [ngClass]="(active===2)?'item':'item font-active'">Non - Veg</ion-col>
-        <ion-col (click)="addClass(3)" [ngClass]="(active===3)?'item':'item font-active'">Both</ion-col>
-      </ion-row>
+      <br>
+      <br>
 
-      <ion-row>
-        <ion-col padding>
-          <div class="text-with-right-toggle mt-20">
-            <ion-label class="ion-float-left toggle-lable">Jain preparation available</ion-label>
-            <ion-toggle class="ion-float-right" slot="end" name="apple" color="danger" checked></ion-toggle>
-          </div>
-        </ion-col>
-      </ion-row>
+      <p>10 - 20 People at a time</p>
+
+      <ion-item lines="none" color="undefine">
+        <ion-range min="10" max="50" step="10" value="10" snaps color="danger">
+        </ion-range>
+      </ion-item>
 
       <ion-row>
         <ion-col padding>
@@ -440,9 +394,52 @@
 
 
 
+    <!-- Average cost per person -->
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <h6 class="ion-text-center ion-margin-bottom">Average cost per person</h6>
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <ion-row>
+        <ion-col padding>
+          <ion-item lines="none" color="undefine" class="full-border">
+            <ion-select placeholder="Please Select State" class="main-color">
+              <ion-select-option value="150 INR" [selected]="true">150 INR</ion-select-option>
+              <ion-select-option value="250 INR">250 INR</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-slide>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- About your restaurant -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
       <h6 class="ion-text-center">About your restaurant</h6>
       <h6 padding class="ion-text-left">
@@ -463,33 +460,6 @@
 
 
 
-
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Type of Restaurant</h6>
-      <br>
-      <br>
-      <ion-row>
-        <ion-col class="ion-margin-top">
-          <div class="round-box" style="margin: auto">
-            <img class="img-logo" src="assets/cafe.svg">
-          </div>
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="list tab-menu">
-        <ion-col class="item font-active">Cafe</ion-col>
-        <ion-col class="item">Restaurent</ion-col>
-        <ion-col class="item">Both</ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
 
 
 

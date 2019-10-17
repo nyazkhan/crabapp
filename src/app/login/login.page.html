@@ -1,7 +1,7 @@
 <ion-content class="ion-no-padding">
 
 
-  <div class="main ion-no-margin"  style="background-color: #ffeee0;">
+  <div class="main ion-no-margin" style="background-color: #ffeee0;">
     <ion-row padding class="ion-no-margin">
       <ion-col padding>
         <div id="recaptcha"></div>
@@ -9,7 +9,8 @@
         <ion-row>
           <ion-col class="fire-logo">
 
-            <h1 style="font-size: xx-large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical" style="margin: 0 !important;">
+            <h1 style="font-size: xx-large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical"
+              style="margin: 0 !important;">
               Welcome to CRAB</h1>
 
             <img src="assets/welcome.png" class="img-logo">
@@ -22,14 +23,14 @@
         <ion-row>
           <ion-col>
             <ion-item class="stylist-input" lines="none" color="undefine">
-              <ion-label slot="start">+91 8925014789</ion-label>
-              <ion-input class="opacity-1" placeholder="Mobile Number"></ion-input>
+              <ion-label slot="end">Mobile Number</ion-label>
+              <ion-input class="opacity-1" type="tel"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn  mt-20 transition">Send
+            <ion-button expand="block" (click)="onSignInSubmit()" color='undefine' class="full-with-btn  mt-20 transition">Send
               OTP</ion-button>
           </ion-col>
         </ion-row>
@@ -115,8 +116,10 @@
         <br>
         <ion-row>
           <ion-col>
-            <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in 60 seconds</span>
-              <span style="float: right;" class="bold btn-color" routerLink="/signup"><img src="assets/refresh.svg" class="img-logo"> RESEND OTP</span></ion-text>
+            <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in
+                60 seconds</span>
+              <span style="float: right;" class="bold btn-color" routerLink="/signup"><img src="assets/refresh.svg"
+                  class="img-logo"> RESEND OTP</span></ion-text>
           </ion-col>
         </ion-row>
       </div>
