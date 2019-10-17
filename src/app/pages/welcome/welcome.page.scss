@@ -1,13 +1,11 @@
-.main-color{
-    color:var(--main-font-color) !important;
-}
+
+
 ion-slides{
     height: 100vh !important;
   }
 ion-slide{
     padding-top: 30px;
     display: block;
-    background-color: #ffeee0;
 }
 ion-slide.swiper-slide {
     align-items: flex-start;
@@ -24,7 +22,7 @@ ion-slide.swiper-slide {
 ion-button.full-with-btn{
     background-color: var(--main-font-color);
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     height: 45px;
     border: 1px solid var(--main-font-color);
     border-radius: 4px;

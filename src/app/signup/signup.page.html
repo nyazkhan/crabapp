@@ -1,82 +1,42 @@
-<ion-content class="login-screen">
+<ion-content class="main-background">
 
-  <ion-row padding class="row">
+  <ion-row padding class="row signup-screen">
     <div padding class="login-screen-content">
-      <!-- <ion-text class="ion-text-left" > -->
 
-      <!-- <p class="bold">OTP recive on</p>
-          <ion-row>
-            <ion-col>
-              <ion-text class="block btn-color"><span class="ion-float-left">+91 8925014789</span>
-                <span style="float: right;" class="btn-color" routerLink="/signup">Change</span></ion-text>
-            </ion-col>
-          </ion-row> -->
-      <!-- </ion-text> -->
 
-      <br>
-      <br>
-
+        <h2 class="ion-text-center bold main-color">Welcome to CRAB</h2>
 
       <ion-row>
         <ion-col class="all-content-center">
-          <img src="assets/massage_icon.svg" class="img-logo" style="height: 75%;">
+            <img src="assets/welcome.png" class="img-logo">
         </ion-col>
       </ion-row>
 
-      <br>
-
-
-      <h3 class="ion-text-center bold main-color">Welcome to CRAB</h3>
-
-      <br>
-
       <ion-item class="stylist-input" lines="none" color="undefine">
-        <ion-label slot="end">OTP</ion-label>
-        <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
+        <ion-input class="opacity-1" placeholder="User name"></ion-input>
       </ion-item>
       <ion-item class="stylist-input" lines="none" color="undefine">
-        <ion-label slot="end">OTP</ion-label>
-        <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
+        <ion-input class="opacity-1" placeholder="Email"></ion-input>
       </ion-item>
       <ion-item class="stylist-input" lines="none" color="undefine">
-        <ion-label slot="end">OTP</ion-label>
-        <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
+        <ion-input class="opacity-1" placeholder="Password"></ion-input>
       </ion-item>
-      <ion-item class="stylist-input" lines="none" color="undefine">
-        <ion-label slot="end">OTP</ion-label>
-        <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
-      </ion-item>
+      <!-- <ion-item class="stylist-input" lines="none" color="undefine">
+        <ion-input class="opacity-1" placeholder="Enter a number from 1 to 1000"></ion-input>
+      </ion-item> -->
 
-
-
-      <!-- <ion-row>
-            <ion-col>
-              <ion-button expand="block" (click)="login()" color="undefined" class="transition">
-                <strong class="white">
-                  Send OTP</strong></ion-button>
-            </ion-col>
-          </ion-row> -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn  mt-20 transition">Send
-            OTP</ion-button>
+          <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn">
+            REGISTER</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-text class="error ion-text-center">{{error}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <br>
-      <ion-row>
-        <ion-col>
-          <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in 60
-              seconds</span>
-            <span style="float: right;" class="bold btn-color" routerLink="/signup"><img src="assets/refresh.svg"
-                class="img-logo"> RESEND OTP</span></ion-text>
-        </ion-col>
-      </ion-row>
+
+            <h6 class="ion-text-center">
+                Don't have an account yet? <span class="bold">Sign up here</span>
+              </h6>
     </div>
   </ion-row>
 
 </ion-content>
+
