@@ -388,6 +388,7 @@ export class WelcomePage implements OnInit {
 
   showDetails() {
     console.log(this.restaurentDetail);
+    this.firestore.collection('Restaurent').doc(this.RestaurentId).update(this.restaurentDetail);
 
   }
   // for Payment selection

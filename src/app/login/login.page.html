@@ -37,7 +37,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" disabled="error" (click)="login()" color='undefine'
+            <ion-button expand="block" [disabled]="error" (click)="login()" color='undefine'
               class="full-with-btn  mt-20 transition">Send
               OTP</ion-button>
           </ion-col>
