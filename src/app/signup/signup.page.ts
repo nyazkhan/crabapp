@@ -11,6 +11,9 @@ export class SignupPage implements OnInit {
   ngOnInit() {
 
   }
+  login() {
+
+  }
   // ngOnInit() {
   //   onSignInSubmit() {
   //     if (this.isPhoneNumberValid()) {

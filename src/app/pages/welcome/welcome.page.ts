@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { IonSlides } from '@ionic/angular';
+declare const $: any;
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.page.html',
@@ -97,8 +98,14 @@ export class WelcomePage implements OnInit {
   //     }
   //   }
   // };
+  @ViewChild(IonSlides, { static: false }) slides: IonSlides;
+
+
+
 
   slidesOpts = {
+    pagination: false,
+    // onlyExternal: false,
     on: {
       beforeInit() {
         const swiper = this;
@@ -185,7 +192,37 @@ export class WelcomePage implements OnInit {
       }
     }
   };
-  Restaurent_Id: any;
+  RestaurentId: any;
+  restaurentDetail: any = {};
+  foodType = {
+    veg: true,
+    nonVeg: false,
+    both: false,
+    jain: true,
+  };
+  paymentOption = {
+    cash: true,
+    credit: false,
+    paytm: false,
+    upi: true,
+  };
+
+  openOn = {
+    sunday: true,
+    monday: false,
+    tuesday: false,
+    wednesday: true,
+    thursday: true,
+    friday: true,
+    saturday: true,
+  };
+  restType = {
+    cafe: false,
+    restaurent: true,
+    both: false,
+  };
+  parking = true;
+  aboutRestaurent: string;
   active: any;
   constructor(
 
@@ -198,7 +235,23 @@ export class WelcomePage implements OnInit {
   }
 
   ngOnInit() {
+
+    // this.slides.lockSwipes(true);
   }
+
+  next() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true);
+  }
+
+  previous() {
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev();
+    this.slides.lockSwipes(true);
+  }
+
+
   subscribeRouteChanges() {
 
     this.activatedRoute.queryParams
@@ -207,19 +260,19 @@ export class WelcomePage implements OnInit {
 
         console.log(e);
 
-        this.Restaurent_Id = e.restaurent;
-        this.getRestaurentById(this.Restaurent_Id);
+        this.RestaurentId = e.restaurent;
+        this.getRestaurentById(this.RestaurentId);
 
 
       }, (err: any) => {
-        // this.router.navigate(['/process']);
+        this.router.navigate(['/googlemap']);
       });
 
   }
   getRestaurentById(id) {
     this.firestore.collection('Restaurent').doc(id).get().subscribe(doc => {
       console.log(doc.data());
-
+      this.restaurentDetail = doc.data();
 
     });
   }
@@ -227,6 +280,54 @@ export class WelcomePage implements OnInit {
 
 
   addClass(val) {
-    this.active = val;
+    // tslint:disable-next-line: object-literal-key-quotes
+
+    if (val === 'veg') {
+      this.foodType.veg = true;
+      this.foodType.nonVeg = false;
+      this.foodType.both = false;
+      console.log(this.foodType);
+      $('#vegColor').css({ 'backgroundColor': '#03fa033d' });
+
+      return;
+    }
+    if (val === 'nonVeg') {
+      this.foodType.veg = false;
+      this.foodType.nonVeg = true;
+      this.foodType.both = false;
+      this.foodType.jain = false;
+      console.log(this.foodType);
+      $('#vegColor').css({ 'backgroundColor': '#f4433630' });
+
+      return;
+
+    }
+    if (val === 'both') {
+      this.foodType.veg = false;
+      this.foodType.nonVeg = false;
+      this.foodType.both = true;
+      console.log(this.foodType);
+      $('#vegColor').css({ 'backgroundColor': '#f7faba61' });
+
+      return;
+
+    }
+
+  }
+
+  addClassInRestType(val) {
+    for (const key in this.restType) {
+
+      if (key === val) {
+        this.restType[key] = true;
+
+
+      } else {
+
+        this.restType[key] = false;
+      }
+
+
+    }
   }
 }

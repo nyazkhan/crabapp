@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'forgot', loadChildren: './forgot/forgot.module#ForgotPageModule' },
   { path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomePageModule' },
   { path: 'googlemap', loadChildren: './pages/googlemap/googlemap.module#GooglemapPageModule' },
+  { path: 'camera', loadChildren: './pages/camera/camera.module#CameraPageModule' },
 ];
 
 @NgModule({

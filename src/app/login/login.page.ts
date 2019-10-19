@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
-// import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+// import { AngularFireAuth } from '@angular/fire/auth';
+// import * as firebase from 'firebase';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -11,20 +11,24 @@ import * as firebase from 'firebase/app';
 })
 export class LoginPage implements OnInit {
 
-  phoneNo = '';
+  phoneNo = '9017697290';
   error: any;
 
   // @ViewChild('recaptchacontainer', { static: false }) recaptcha: ElementRef;
   varificationId: any;
 
 
-  public recaptchaVerifier: firebase.auth.RecaptchaVerifier; recaptchaWidgetId: any;
-  confirmationResult: firebase.auth.ConfirmationResult;
+  // public recaptchaVerifier: firebase.auth.RecaptchaVerifier; recaptchaWidgetId: any;
+  // confirmationResult: firebase.auth.ConfirmationResult;
   isApp: boolean;
   otp: number;
   phone: string;
+  code: string;
+
+  otpSend = false;
   constructor(
-    @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
+    // @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
+    @Inject(FirebaseAuthentication) public firebaseAuthentication: FirebaseAuthentication,
     // private fireAuth: FirebaseAuthentication,
     @Inject(Router) private router: Router,
     private toastController: ToastController,
@@ -51,119 +55,102 @@ export class LoginPage implements OnInit {
 
   }
 
-  // send() {
-  //   const tell = '+91' + this.phone;
-  //   (<any> window).FirebasePlugin.verifyPhoneNumber(tell, 60, (credential) => {
-  //     console.log(credential);
-  //     this.verificationId = credential.verificationId;
-  //   }, (error) => {
-  //     console.error(error);
-  //     alert(error);
-  //    });
-  // }
-
-  // verify() {
-  //   const signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, this.code);
-  //   firebase.auth().signInWithCredential(signInCredential).then((info) => {
-  //     console.log(info);
-  //     // this.navCtrl.navigateRoot('/home');
-  //   }, (error) => {
-  //     console.log(error);
-  //   });
-  //   }
 
 
-  // login() {
-  //   this.firebaseAuthentication.verifyPhoneNumber('+919017697290', 30000).then((varificationId) => {
-  //     this.varificationId = varificationId;
-  //   }).catch((error) => {
 
-  //   });
-  // }
-
-  // signInWhitOTP() {
-  //   this.firebaseAuthentication.signInWithVerificationId(this.varificationId, this.otp).then((res) => {
-
-  //   }).catch((error) => {
-
-  //   });
-  // }
-
-
-  async openLoader() {
-    const loading = await this.loadingController.create({
-      message: 'Please Wait ...',
-      duration: 2000
-    });
-    await loading.present();
-  }
-  async closeLoading() {
-    return await this.loadingController.dismiss();
-  }
-  onSignInSubmit() {
-    console.log('its call');
-    const appVerifier = this.recaptchaVerifier;
-    this.angularFire.auth.settings.appVerificationDisabledForTesting = true;
-    // this.recaptchaVerifier.verify().then((widgetId) => {
-    //   // this.recaptchaWidgetId =
-    //   console.log(widgetId);
-    // });
-    this.angularFire.auth.signInWithPhoneNumber('+' + this.phoneNo, appVerifier)
-      .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
-        this.confirmationResult = confirmationResult;
-        const code = window.prompt('Please enter your code');
-        return confirmationResult.confirm(code);
-
-
-      }).then(() => {
-
+  login() {
+    this.otpSend = true;
+    this.firebaseAuthentication.verifyPhoneNumber('+91' + this.phoneNo, 60000)
+      .then((varificationId) => {
+        this.varificationId = varificationId;
       }).catch((error) => {
-        // Error; SMS not sent
-        // ...
-        console.log('wrong opt');
-
+        this.otpSend = false;
       });
   }
-  ionViewDidEnter() {
-    // this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-    //   'size': 'invisible', 'callback': (response) => {
-    //     // reCAPTCHA solved, allow signInWithPhoneNumber.
-    //     this.onSignInSubmit();
-    //   }
-    // });
-    this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha',
-      {
-        size: 'invisible', callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          console.log(response);
 
-          this.onSignInSubmit();
-        }
-      });
+  signInWhitOTP() {
+    this.firebaseAuthentication.signInWithVerificationId(this.varificationId, this.otp).then((res) => {
+      // tslint:disable-next-line: no-unused-expression
+      this.router.navigate[('googlemap')];
+    }).catch((error) => {
 
-    // [END appVerifier]
-    // this.recaptchaVerifier.clear();
-    // verify().then((widgetId) => {
-    //   // this.recaptchaWidgetId =
-    //   console.log(widgetId);
-    // });
-  }
-  async presentToast(Message, showbutton, Position, Duration) {
-    const toast = await this.toastController.create({
-      message: Message,
-      showCloseButton: showbutton,
-      position: Position,
-      duration: Duration
     });
-    toast.present();
   }
+
+
+  phoneValidation(no) {
+    const regExp = /^[0-9]{10}$/;
+
+    if (!regExp.test(no)) {
+      this.error = ' Please enter a valid Phone No';
+      return { invalidMobile: true };
+    }
+    console.log('invalidno');
+    this.error = null;
+
+    return null;
+  }
+
+  resendOtp() {
+
+  }
+
+  // onSignInSubmit() {
+  //   console.log('its call');
+  //   const appVerifier = this.recaptchaVerifier;
+  //   this.angularFire.auth.settings.appVerificationDisabledForTesting = true;
+
+  //   this.angularFire.auth.signInWithPhoneNumber('+' + this.phoneNo, appVerifier)
+  //     .then((confirmationResult) => {
+  //       // SMS sent. Prompt user to type the code from the message, then sign the
+  //       // user in with confirmationResult.confirm(code).
+  //       this.confirmationResult = confirmationResult;
+  //       const code = window.prompt('Please enter your code');
+  //       return confirmationResult.confirm(code);
+
+
+  //     }).then(() => {
+
+  //     }).catch((error) => {
+  //       // Error; SMS not sent
+  //       // ...
+  //       console.log('wrong opt');
+
+  //     });
+  // }
+  // ionViewDidEnter() {
+
+  //   this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha',
+  //     {
+  //       size: 'invisible', callback: (response) => {
+  //         // reCAPTCHA solved, allow signInWithPhoneNumber.
+  //         console.log(response);
+
+  //         this.onSignInSubmit();
+  //       }
+  //     });
+
+  //   // [END appVerifier]
+  //   // this.recaptchaVerifier.clear();
+  //   // verify().then((widgetId) => {
+  //   //   // this.recaptchaWidgetId =
+  //   //   console.log(widgetId);
+  //   // });
+  // }
+  // async presentToast(Message, showbutton, Position, Duration) {
+  //   const toast = await this.toastController.create({
+  //     message: Message,
+  //     showCloseButton: showbutton,
+  //     position: Position,
+  //     duration: Duration
+  //   });
+  //   toast.present();
+  // }
   ngOnInit() {
 
   }
 
-  login() {
+  // login() {
 
-  }
+  // }
 }
