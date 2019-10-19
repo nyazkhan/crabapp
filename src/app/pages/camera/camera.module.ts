@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPage } from './login.page';
-
+import { CameraPage } from './camera.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginPage
+    component: CameraPage
   }
 ];
 
@@ -20,10 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    // AngularFireAuthModule
+    RouterModule.forChild(routes)
   ],
-  providers: [],
-  declarations: [LoginPage]
+  declarations: [CameraPage]
 })
-export class LoginPageModule { }
+export class CameraPageModule {}

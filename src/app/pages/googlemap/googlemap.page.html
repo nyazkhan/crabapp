@@ -20,10 +20,10 @@
 
     <form form #addressForm="ngForm">
 
-      <p style="font-weight: bold;">{{restaurentDetails.name}}</p>
+      <p style="font-weight: bold;">{{restaurentDetails?.name}}</p>
 
       <h6 class="ion-text-left" style="font-size: 14px;">
-        {{restaurentDetails.formatted_address}} </h6>
+        {{restaurentDetails?.formatted_address}} </h6>
 
       <br>
       <ion-item class="stylist-input" lines="none" color="undefine">

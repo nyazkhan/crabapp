@@ -1,11 +1,11 @@
 <ion-content class="main-background">
-  <ion-slides options="myOptions" pager="false" slider="mySlide[item.id]">
+  <ion-slides options="myOptions" class="swiper-no-swiping">
 
 
 
 
     <!-- about restaurent -->
-    <ion-slide padding class="all-content-center">
+    <!-- <ion-slide padding class="all-content-center">
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box-dark" style="margin: auto">
@@ -18,60 +18,67 @@
         </ion-col>
       </ion-row>
 
-    </ion-slide>
+    </ion-slide> -->
 
 
 
 
     <!-- Restaurent Name -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-      <h6 class="ion-text-center ion-margin-bottom">Restaurent Name</h6>
+
+      <h4 class="ion-text-center ion-margin-bottom">Restaurent Name</h4>
       <br><br><br><br><br><br><br><br>
 
       <div>
-        <ion-input type="text" class="bold"></ion-input>
+        <ion-input type="text" class="main-color " autofocus id="nameOfRest" [(ngModel)]="restaurentDetail.name"
+          name="name" class="bold"></ion-input>
       </div>
 
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
 
     </ion-slide>
 
 
     <!-- Food served in restaurant is -->
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-
+    <ion-slide padding id="vegColor" style="background-color: #ffeee0; vertical-align:top">
       <div class="ion-float-left main-color">
-          <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
       </div>
-      
       <h6 class="ion-text-center ion-margin-bottom">Food served in restaurant is</h6>
       <br>
       <br>
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img  class="img-veg" src="assets/veg.svg">
+            <img class="img-veg" src="assets/veg.svg">
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row class="list tab-menu">
-        <ion-col (click)="addClass(1)" [ngClass]="(active===1)?'item font-active':'item '">Veg</ion-col>
-        <ion-col (click)="addClass(2)" [ngClass]="(active===2)?'item font-active':'item '">Non - Veg</ion-col>
-        <ion-col (click)="addClass(3)" [ngClass]="(active===3)?'item font-active':'item '">Both</ion-col>
+        <ion-col (click)="addClass( 'veg')" [ngClass]="(foodType.veg)?'item font-active':'item '">Veg</ion-col>
+        <ion-col (click)="addClass( 'nonVeg')" [ngClass]="(foodType.nonVeg)?'item font-active':'item '">Non - Veg
+        </ion-col>
+        <ion-col (click)="addClass( 'both')" [ngClass]="(foodType.both)?'item font-active':'item '">Both</ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngIf="!foodType.nonVeg">
         <ion-col padding>
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Jain preparation available</ion-label>
-            <ion-toggle class="ion-float-right" slot="end" name="apple" color="danger" checked></ion-toggle>
+            <ion-toggle class="ion-float-right" [(ngModel)]="foodType.jain" slot="end" name="jain" color="danger"
+              checked></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -79,9 +86,12 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
     </ion-slide>
 
@@ -89,6 +99,13 @@
 
     <!-- Type of Restaurant -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
+
       <h6 class="ion-text-center ion-margin-bottom">Type of Restaurant</h6>
       <br>
       <br>
@@ -101,23 +118,35 @@
       </ion-row>
 
       <ion-row class="list tab-menu">
-        <ion-col class="item font-active">Cafe</ion-col>
-        <ion-col class="item">Restaurent</ion-col>
-        <ion-col class="item">Both</ion-col>
+        <ion-col (click)="addClassInRestType( 'cafe')" [ngClass]="(restType.cafe)?'item font-active':'item '">Cafe
+        </ion-col>
+        <ion-col (click)="addClassInRestType( 'restaurent')"
+          [ngClass]="(restType.restaurent)?'item font-active':'item '">
+          Restaurent</ion-col>
+        <ion-col (click)="addClassInRestType( 'both')" [ngClass]="(restType.both)?'item font-active':'item '">Both
+        </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
     </ion-slide>
 
 
     <!-- Payment Options -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center ion-margin-bottom">Payment Options</h6>
       <br>
       <br>
@@ -134,15 +163,15 @@
           <ion-item-sliding padding>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Cash</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="paymentOption.cash" name="cash" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Credit / Debit Card</ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="paymentOption.credit" name="credit" color="danger"></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Paytm</ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="paymentOption.paytm" name="paytm" color="danger"></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">
@@ -150,24 +179,32 @@
                 <br>
                 <p style="font-size: 12px;margin-top:5px;">Google pay / Phonepay / Paytm UPI etc</p>
               </ion-label>
-              <ion-toggle slot="end" color="danger"></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="paymentOption.upi" name="upi" color="danger"></ion-toggle>
             </ion-item>
           </ion-item-sliding>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
-          <ion-col padding>
-            <div class="fixed-btn">
-              <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
-            </div>
-          </ion-col>
-        </ion-row> -->
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
+          </div>
+        </ion-col>
+
+
+      </ion-row>
     </ion-slide>
 
 
 
     <!-- You are open on -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center">You are open on</h6>
       <br>
       <br>
@@ -176,31 +213,31 @@
           <ion-item-sliding padding>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Monday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.monday" name="monday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Tuesday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.tuesday" name="tuesday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Wednesday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.wednesday" name="wednesday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Thursday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.thursday" name="thursday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Friday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.friday" name="friday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Saturday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.saturday" name="saturday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Sunday</ion-label>
-              <ion-toggle slot="end" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.sunday" name="sunday" color="danger" checked></ion-toggle>
             </ion-item>
           </ion-item-sliding>
         </ion-col>
@@ -209,9 +246,12 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
     </ion-slide>
 
@@ -221,6 +261,11 @@
     <!-- Restaurant timing -->
 
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center ion-margin-bottom">Restaurant timing</h6>
       <br>
       <div padding style="display:flex" class="all-content-center">
@@ -316,9 +361,12 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
 
     </ion-slide>
@@ -327,6 +375,11 @@
 
     <!-- Parking Area -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center ion-margin-bottom">Parking Area</h6>
       <br>
       <br>
@@ -352,9 +405,12 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
     </ion-slide>
 
@@ -365,6 +421,11 @@
 
     <!-- Accommodation size -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center ion-margin-bottom">Accommodation Size</h6>
       <br>
       <br>
@@ -389,9 +450,12 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' class="full-with-btn  mt-20">PROCEED</ion-button>
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
           </div>
         </ion-col>
+
+
       </ion-row>
     </ion-slide>
 
@@ -400,6 +464,11 @@
 
     <!-- Average cost per person -->
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
       <h6 class="ion-text-center ion-margin-bottom">Average cost per person</h6>
       <br><br><br><br><br><br><br><br><br><br><br><br>
 

@@ -85,10 +85,11 @@ ion-button.full-with-btn{
 //     transition: .6s ease;
 // }
 .font-active{
-    font-size:21px !important;
+    // font-size:21px !important;
+    transform : scale(1.2) translateY(-5px);
     font-weight: bold !important;
     opacity: 1 !important;
-    transition: .6s ease;
+    transition: .15s ease;
 
 }
 

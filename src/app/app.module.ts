@@ -10,26 +10,27 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './error/error.component';
 import { CommanService } from './service/comman.service';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent,
     ErrorComponent],
   entryComponents: [],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(environment.config),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     CommanService,
+    FirebaseAuthentication,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
