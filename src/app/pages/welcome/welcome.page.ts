@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 declare const $: any;
 @Component({
   selector: 'app-welcome',
@@ -100,7 +100,7 @@ export class WelcomePage implements OnInit {
   // };
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
-
+  curentDay = 0;
 
 
   slidesOpts = {
@@ -195,7 +195,7 @@ export class WelcomePage implements OnInit {
   RestaurentId: any;
   restaurentDetail: any = {};
   foodType = {
-    veg: true,
+    veg: false,
     nonVeg: false,
     both: false,
     jain: true,
@@ -207,25 +207,67 @@ export class WelcomePage implements OnInit {
     upi: true,
   };
 
-  openOn = {
-    sunday: true,
-    monday: false,
-    tuesday: false,
-    wednesday: true,
-    thursday: true,
-    friday: true,
-    saturday: true,
-  };
+  openOn = [
+
+    {
+      day: 'Monday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Tuesday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Wednesday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Thursday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Friday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Saturday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+    {
+      day: 'Sunday',
+      isOpen: true,
+      open: '',
+      close: ''
+    },
+  ];
+
   restType = {
     cafe: false,
     restaurent: true,
     both: false,
   };
   parking = true;
+  restCapacity = 10;
   aboutRestaurent: string;
   active: any;
-  constructor(
 
+  selectedDays: any;
+  selectedDayTime: any = {};
+
+  constructor(
+    public alertController: AlertController,
     @Inject(Router) private router: Router,
     @Inject(AngularFirestore) private firestore: AngularFirestore,
     @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
@@ -279,6 +321,29 @@ export class WelcomePage implements OnInit {
 
 
 
+  saveFoodType() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['foodType'] = this.foodType;
+    this.next();
+  }
+
+  saveRestType() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['restType'] = this.restType;
+    this.next();
+  }
+
+  savePaymentType() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['paymentOption'] = this.paymentOption;
+    this.next();
+  }
+
+  saveParking() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['parking'] = this.parking;
+    this.next();
+  }
   addClass(val) {
     // tslint:disable-next-line: object-literal-key-quotes
 
@@ -330,4 +395,87 @@ export class WelcomePage implements OnInit {
 
     }
   }
+
+  // for day selection
+  selectDays() {
+    this.selectedDays = this.openOn.filter(element => element.isOpen);
+    this.next();
+  }
+
+
+  sendDay(day) {
+    delete this.selectedDayTime;
+
+    this.selectedDayTime = day;
+  }
+
+
+  setSametimeForAll(val) {
+    if (!val) {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < this.selectedDays.length; i++) {
+        this.selectedDays[i].open = this.selectedDayTime.open;
+        this.selectedDays[i].close = this.selectedDayTime.close;
+
+      }
+    }
+
+  }
+
+  saveOpeningDaysANdTime() {
+
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['customOpencloseTimeing'] = this.selectedDays;
+  }
+
+
+  checkForRequiredFieldOnDay() {
+    let er = 0;
+    this.selectedDays.forEach(element => {
+      if ((element.isOpen)) {
+        if (((element.open === '') || (element.close === ''))) {
+          er++;
+        }
+      }
+    });
+
+    if (er > 0) {
+      this.presentAlert();
+
+    } else {
+      this.next();
+      this.saveOpeningDaysANdTime();
+    }
+  }
+  openTime(val) {
+    if (val) {
+      this.selectedDays[this.curentDay].open = val;
+
+    }
+
+  }
+  closeTime(val) {
+    if (val) {
+      this.selectedDays[this.curentDay].close = val;
+
+    }
+
+  }
+
+
+  // for Payment selection
+
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'ERROR',
+      // subHeader: 'Subtitle',
+      message: 'Please Set Time For all Day',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -21,7 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    // AngularFireAuthModule
+    AngularFireAuthModule
   ],
   providers: [],
   declarations: [LoginPage]

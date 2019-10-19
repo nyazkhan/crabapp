@@ -15,12 +15,14 @@ import { AngularFireModule } from '@angular/fire';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent,
     ErrorComponent],
   entryComponents: [],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(environment.config),
+    AngularFirestoreModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(), AppRoutingModule],
   providers: [

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PhotoService } from 'src/app/service/photo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-camera',
@@ -9,7 +10,9 @@ import { PhotoService } from 'src/app/service/photo.service';
 export class CameraPage implements OnInit {
   currentImage: any;
 
-  constructor(public photoService: PhotoService) { }
+  constructor(
+    public photoService: PhotoService,
+    @Inject(Router) private router: Router) { }
 
   ngOnInit() {
     this.photoService.loadSaved();

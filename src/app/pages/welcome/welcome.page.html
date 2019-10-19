@@ -86,7 +86,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="saveFoodType()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -130,7 +130,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="saveRestType()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -187,7 +187,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="savePaymentType()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -211,34 +211,34 @@
       <ion-row>
         <ion-col>
           <ion-item-sliding padding>
-            <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Monday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.monday" name="monday" color="danger" checked></ion-toggle>
+            <ion-item *ngFor="let days of openOn" lines="none" color="undefine" class="bot-border">
+              <ion-label class="toggle-lable" style="color:#c44829">{{days.day}}</ion-label>
+              <ion-toggle slot="end" [(ngModel)]="days.isOpen" name="monday" color="danger" checked></ion-toggle>
             </ion-item>
-            <ion-item lines="none" color="undefine" class="bot-border">
+            <!-- <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Tuesday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.tuesday" name="tuesday" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.tuesday" name="tuesday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Wednesday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.wednesday" name="wednesday" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.wednesday" name="wednesday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Thursday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.thursday" name="thursday" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.thursday" name="thursday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Friday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.friday" name="friday" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.friday" name="friday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Saturday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.saturday" name="saturday" color="danger" checked></ion-toggle>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.saturday" name="saturday" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:#c44829">Sunday</ion-label>
-              <ion-toggle slot="end" [(ngModel)]="openOn.sunday" name="sunday" color="danger" checked></ion-toggle>
-            </ion-item>
+              <ion-toggle slot="end" [(ngModel)]="openOn.day0.sunday" name="sunday" color="danger" checked></ion-toggle>
+            </ion-item> -->
           </ion-item-sliding>
         </ion-col>
       </ion-row>
@@ -246,7 +246,8 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="selectDays();" class="full-with-btn  mt-20">
+              PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -269,42 +270,44 @@
       <h6 class="ion-text-center ion-margin-bottom">Restaurant timing</h6>
       <br>
       <div padding style="display:flex" class="all-content-center">
-        <ion-button size="small" color="undefine" class="day-square-btn day-active">S</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">M</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">T</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">W</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">T</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">F</ion-button>
-        <ion-button size="small" color="undefine" class="day-square-btn">S</ion-button>
+        <div *ngFor="let days of selectedDays; let i = index;">
+          <ion-button size="small" color="undefine" (click)=" sendDay(days); curentDay = i"
+            [ngClass]="(curentDay ==i)?' day-square-btn day-active': 'day-square-btn'">
+            {{days.day.substring(0, 1)}}</ion-button>
+        </div>
       </div>
 
+
       <ion-row>
-        <ion-col size="5">
+        <ion-col size="12">
           <ion-item lines="none" color="undefine" class="full-border">
 
-            <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z">
+            <ion-datetime class="main-color" display-format="hh:mm A" placeholder="Select Opening time"
+              picker-format="hh:mm A" (ionChange)="openTime(selectedDayTime.open)" [(ngModel)]="selectedDayTime.open"
+              name="open">
             </ion-datetime>
           </ion-item>
         </ion-col>
 
-        <ion-col size="2" style="padding: 0;">
+        <ion-col size="12" style="padding: 0;">
           <ion-item lines="none" color="undefine">
             <ion-label class="ion-text-center lable-font">to</ion-label>
           </ion-item>
         </ion-col>
 
-        <ion-col size="5">
+        <ion-col size="12">
           <ion-item lines="none" color="undefine" class="full-border">
-            <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z">
+            <ion-datetime [disabled]="selectedDayTime.open==''" class="main-color" display-format="hh:mm A"
+              [(ngModel)]="selectedDayTime.close" (ionChange)="closeTime(selectedDayTime.close)"
+              placeholder="Select Closing Time" picker-format="hh:mm A" name="close">
             </ion-datetime>
           </ion-item>
         </ion-col>
 
       </ion-row>
-
       <ion-item-divider lines="none" color="undefine"></ion-item-divider>
       <br>
-
+      <!-- 
       <ion-row>
         <ion-col size="10">
           <ion-item lines="none" color="undefine" class="full-border">
@@ -350,18 +353,28 @@
             </ion-datetime>
           </ion-item>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
       <br>
       <br>
 
-      <h6 class="ion-text-center ion-margin-bottom">+ Add different time for any day</h6>
-      <br>
+      <ion-row *ngIf="((selectedDayTime.close)&&(selectedDayTime.open))">
+        <ion-col padding>
+          <div class="text-with-right-toggle mt-20">
+            <ion-label class="ion-float-left toggle-lable">Same Timing For All Day</ion-label>
+            <ion-toggle class="ion-float-right" [(ngModel)]="sameTimeForAll" (click)="setSametimeForAll(sameTimeForAll)"
+              slot="end" name="sameTime" color="danger" checked>
+            </ion-toggle>
+          </div>
+        </ion-col>
+      </ion-row> <br>
 
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)=" checkForRequiredFieldOnDay(); "
+              class="full-with-btn  mt-20">
+              PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -397,7 +410,8 @@
         <ion-col padding>
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Parking is available</ion-label>
-            <ion-toggle class="ion-float-right" slot="end" name="apple" color="danger" checked></ion-toggle>
+            <ion-toggle class="ion-float-right" name="parking" [(ngModel)]="parking" slot="end" name="apple"
+              color="danger" checked></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -405,7 +419,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="saveParking()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -432,18 +446,23 @@
       <ion-row>
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
-            <img class="img-logo" src="assets/tables.svg">
-          </div>
+              <img class="img-logo" src="assets/tables.svg">
+              <!-- <img class="img-logo" src="assets/tables.svg">
+              <img class="img-logo" src="assets/tables.svg"> -->
+            </div>
         </ion-col>
       </ion-row>
 
       <br>
       <br>
-
-      <p>10 - 20 People at a time</p>
+      <p *ngIf="restCapacity== 10">10 - 20 People at a time</p>
+      <p *ngIf="restCapacity== 20">20 - 30 People at a time</p>
+      <p *ngIf="restCapacity== 30">30 - 40 People at a time</p>
+      <p *ngIf="restCapacity== 40">40 - 50 People at a time</p>
+      <p *ngIf="restCapacity== 50">More then 50 People at a time</p>
 
       <ion-item lines="none" color="undefine">
-        <ion-range min="10" max="50" step="10" value="10" snaps color="danger">
+        <ion-range min="10" max="50" step="10" [(ngModel)]="restCapacity" name="capacity" snaps color="danger">
         </ion-range>
       </ion-item>
 
