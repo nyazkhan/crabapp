@@ -92,7 +92,7 @@ export class LoginPage implements OnInit {
   }
 
   resendOtp() {
-
+    this.router.navigate(['/googlemap']);
   }
 
   // onSignInSubmit() {
