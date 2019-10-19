@@ -34,6 +34,10 @@ export class PhotoService {
 
   }
 
+  removePicture(data) {
+    this.photos.splice(this.photos.indexOf(data), 1);
+  }
+
   loadSaved() {
     this.storage.get('photos').then((photos) => {
       this.photos = photos || [];

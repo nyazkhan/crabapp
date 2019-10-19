@@ -156,3 +156,14 @@ ion-select{
     color: #c44829;
 
 }
+
+.menu-img{
+    position: relative;
+    .rm-btn{
+        position: absolute;
+        right: 5px;
+        padding: 5px;
+        background: #c44829;
+        color: #ffeee0;
+    }
+}
