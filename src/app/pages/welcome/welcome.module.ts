@@ -34,3 +34,5 @@ export class WelcomePageModule {}
 //     $(this).addClass("font-active");
 // });
 // });
+
+
