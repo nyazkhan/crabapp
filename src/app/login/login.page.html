@@ -14,7 +14,7 @@
 
             <img src="assets/welcome.png" class="img-logo">
 
-            <p style="font-size: 18px !important" class="ion-text-center bold">Create A New Account</p>
+            <p style="font-size: 18px !important" class="ion-text-center bold">Create A New Account/Login</p>
 
           </ion-col>
         </ion-row>
@@ -23,8 +23,8 @@
           <ion-col>
             <ion-item class="stylist-input" lines="none" color="undefine">
               <ion-label slot="end" style="font-size: 12px;">Mobile Number</ion-label>
-              <ion-input class="opacity-1" type="number" (keydown)="isValidNumber($event)" (keyup)="phoneValidation()" name="phoneNo"
-                [(ngModel)]="phoneNo">
+              <ion-input class="opacity-1" type="number" (keydown)="isValidNumber($event)" (keyup)="phoneValidation()"
+                name="phoneNo" [(ngModel)]="phoneNo">
               </ion-input>
             </ion-item>
           </ion-col>

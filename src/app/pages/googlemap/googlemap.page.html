@@ -1,8 +1,10 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>googlemap</ion-title>
+<ion-header>
+  <ion-toolbar class=" main-background main-color">
+    <ion-title class="ion-text-center">Welcome To CRAB </ion-title>
+
+    <ion-title  class="ion-text-center" size="small">Enter Name Of Your Restaurant</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content>
   <div id="locationField">
@@ -16,14 +18,14 @@
     </table>
   </div>
 
-  <div *ngIf="restaurentDetails.formatted_address" class="map-setting-part">
+  <div *ngIf="restaurantDetails.formatted_address" class="map-setting-part">
 
     <form #addressForm="ngForm">
 
-      <p style="font-weight: bold;">{{restaurentDetails?.name}}</p>
+      <p style="font-weight: bold;">{{restaurantDetails?.name}}</p>
 
       <h6 class="ion-text-left" style="font-size: 14px;">
-        {{restaurentDetails?.formatted_address}} </h6>
+        {{restaurantDetails?.formatted_address}} </h6>
 
       <br>
       <ion-item class="stylist-input" lines="none" color="undefine">
@@ -68,8 +70,7 @@
       </ion-item> -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" color='undefine' (click)="gotoWelcomPage()"
-            class="full-with-btn  mt-20">SET
+          <ion-button expand="block" color='undefine' (click)="gotoWelcomPage()" class="full-with-btn  mt-20">SET
             LOCATION</ion-button>
         </ion-col>
       </ion-row>

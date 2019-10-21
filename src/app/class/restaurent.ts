@@ -1,12 +1,12 @@
-export class Restaurent {
+export class Restaurant {
     id: number;
     name: string;
-address: RestaurentAddress;
+address: RestaurantAddress;
 images: [];
 
 }
 
-export interface RestaurentAddress {
+export interface RestaurantAddress {
 address: string;
 pincode: number;
 state: string;

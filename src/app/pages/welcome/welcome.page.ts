@@ -106,8 +106,8 @@ export class WelcomePage implements OnInit {
       }
     }
   };
-  RestaurentId: any;
-  restaurentDetail: any = {};
+  RestaurantId: any;
+  restaurantDetail: any = {};
   foodType = {
     veg: false,
     nonVeg: false,
@@ -169,13 +169,13 @@ export class WelcomePage implements OnInit {
 
   restType = {
     cafe: false,
-    restaurent: true,
+    restaurant: true,
     both: false,
   };
   parking = true;
   restCapacity = 10;
   restCost = 50;
-  aboutRestaurent: string;
+  aboutRestaurant: string;
   active: any;
 
   // openOn: any;
@@ -224,8 +224,8 @@ export class WelcomePage implements OnInit {
 
         console.log(e);
 
-        this.RestaurentId = e.user;
-        this.getRestaurentById(this.RestaurentId);
+        this.RestaurantId = e.user;
+        this.getRestaurantById(this.RestaurantId);
 
 
       }, (err: any) => {
@@ -233,62 +233,62 @@ export class WelcomePage implements OnInit {
       });
 
   }
-  getRestaurentById(id) {
+  getRestaurantById(id) {
     this.firestore.collection('users').doc(id).get().subscribe(doc => {
       this.alertService.closeLoader();
       console.log(doc.data());
       this.userDetails = doc.data();
-      this.restaurentDetail = this.userDetails.Restaurent;
+      this.restaurantDetail = this.userDetails.Restaurant;
 
-      if (this.restaurentDetail.restType) {
+      if (this.restaurantDetail.restType) {
 
-        this.restType = this.restaurentDetail.restType;
+        this.restType = this.restaurantDetail.restType;
       }
 
-      if (this.restaurentDetail.foodType) {
+      if (this.restaurantDetail.foodType) {
 
-        this.foodType = this.restaurentDetail.foodType;
+        this.foodType = this.restaurantDetail.foodType;
       }
 
-      if (this.restaurentDetail.paymentOption) {
+      if (this.restaurantDetail.paymentOption) {
 
-        this.paymentOption = this.restaurentDetail.paymentOption;
+        this.paymentOption = this.restaurantDetail.paymentOption;
       }
 
-      if ((this.restaurentDetail.parking === false) || (this.restaurentDetail.parking === true)) {
+      if ((this.restaurantDetail.parking === false) || (this.restaurantDetail.parking === true)) {
 
-        this.parking = this.restaurentDetail.parking;
+        this.parking = this.restaurantDetail.parking;
       }
 
-      if (this.restaurentDetail.aboutRestaurent) {
+      if (this.restaurantDetail.aboutRestaurant) {
 
-        this.aboutRestaurent = this.restaurentDetail.aboutRestaurent;
+        this.aboutRestaurant = this.restaurantDetail.aboutRestaurant;
       }
       if (this.userDetails.email) {
 
         this.email = this.userDetails.email;
       }
-      if (this.restaurentDetail.customOpencloseTimeing) {
+      if (this.restaurantDetail.customOpencloseTimeing) {
 
-        this.openOn = this.restaurentDetail.customOpencloseTimeing;
+        this.openOn = this.restaurantDetail.customOpencloseTimeing;
       }
 
-      if (this.restaurentDetail.restImg) {
+      if (this.restaurantDetail.restImg) {
 
-        this.photoService.photos = this.restaurentDetail.restImg;
+        this.photoService.photos = this.restaurantDetail.restImg;
       }
 
-      if (this.restaurentDetail.restCost) {
+      if (this.restaurantDetail.restCost) {
 
-        this.restCost = this.restaurentDetail.restCost;
+        this.restCost = this.restaurantDetail.restCost;
       }
-      if (this.restaurentDetail.restCapacity) {
+      if (this.restaurantDetail.restCapacity) {
 
-        this.restCapacity = this.restaurentDetail.restCapacity;
+        this.restCapacity = this.restaurantDetail.restCapacity;
       }
 
     }, (error) => {
-      this.alertService.showErrorAlert('please select Restaurent Again');
+      this.alertService.showErrorAlert('please select Restaurant Again');
       this.router.navigate(['/googlemap']);
       this.alertService.closeLoader();
 
@@ -300,45 +300,45 @@ export class WelcomePage implements OnInit {
 
   saveFoodType() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['foodType'] = this.foodType;
+    this.restaurantDetail['foodType'] = this.foodType;
     this.next();
   }
 
   saveRestType() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['restType'] = this.restType;
+    this.restaurantDetail['restType'] = this.restType;
     this.next();
   }
 
   savePaymentType() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['paymentOption'] = this.paymentOption;
+    this.restaurantDetail['paymentOption'] = this.paymentOption;
     this.next();
   }
 
   saveParking() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['parking'] = this.parking;
+    this.restaurantDetail['parking'] = this.parking;
     this.next();
   }
 
-  saveAboutRestaurent() {
+  saveAboutRestaurant() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['aboutRestaurent'] = this.aboutRestaurent;
+    this.restaurantDetail['aboutRestaurant'] = this.aboutRestaurant;
     this.next();
 
   }
 
   SaveRestCapacity() {
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['restCapacity'] = this.restCapacity;
+    this.restaurantDetail['restCapacity'] = this.restCapacity;
     this.next();
   }
 
   saveCost() {
 
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['restCost'] = this.restCost;
+    this.restaurantDetail['restCost'] = this.restCost;
     this.next();
   }
 
@@ -429,7 +429,7 @@ export class WelcomePage implements OnInit {
   saveOpeningDaysANdTime() {
 
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['customOpencloseTimeing'] = this.openOn;
+    this.restaurantDetail['customOpencloseTimeing'] = this.openOn;
   }
 
 
@@ -480,14 +480,14 @@ export class WelcomePage implements OnInit {
 
   }
   saveImg() {
-    this.restaurentDetail['restImg'] = this.photoService.photos;
+    this.restaurantDetail['restImg'] = this.photoService.photos;
     this.next();
   }
 
   SetUserData() {
 
     // const userDetails = JSON.parse(localStorage.getItem('user'));
-    this.userDetails.Restaurent = this.restaurentDetail;
+    this.userDetails.Restaurant = this.restaurantDetail;
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${this.userDetails.uid}`);
 
     return userRef.set(JSON.parse(JSON.stringify(this.userDetails)), {

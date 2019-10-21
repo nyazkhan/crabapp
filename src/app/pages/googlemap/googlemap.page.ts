@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AlertService } from 'src/app/service/alert.service';
 // import { PopoverPage } from './address-popover/address-popover';
-// import { RestaurentAddress } from 'src/app/class/restaurent';
+// import { RestaurantAddress } from 'src/app/class/restaurant';
 declare const google: any;
 @Component({
   selector: 'app-googlemap',
@@ -51,7 +51,7 @@ export class GooglemapPage implements OnInit {
     country: 'long_name',
     postal_code: 'short_name'
   };
-  restaurentDetails: any = [];
+  restaurantDetails: any = [];
   userUid: any;
   input: any;
   userDetail: any;
@@ -94,11 +94,11 @@ export class GooglemapPage implements OnInit {
     this.firestore.collection('users').doc(id).get().subscribe(doc => {
       console.log(doc.data());
       this.userDetail = doc.data();
-      if (this.userDetail.Restaurent) {
+      if (this.userDetail.Restaurant) {
         this.changeMapHieght('50vh');
         // this.initAutocomplete();
-        this.restaurentDetails = this.userDetail.Restaurent;
-        this.address = this.restaurentDetails.customAddress;
+        this.restaurantDetails = this.userDetail.Restaurant;
+        this.address = this.restaurantDetails.customAddress;
       } else {
         // this.initAutocomplete();
 
@@ -175,10 +175,10 @@ export class GooglemapPage implements OnInit {
     // more details for that place.
     this.alertService.closeLoader();
     searchBox.addListener('places_changed', () => {
-      this.restaurentDetails = [];
+      this.restaurantDetails = [];
 
       const places = searchBox.getPlaces();
-      this.restaurentDetails = places[0];
+      this.restaurantDetails = places[0];
       console.log(places);
       if (places.length === 0) {
         return;
@@ -264,7 +264,7 @@ export class GooglemapPage implements OnInit {
       this.address.address = places[0].vicinity;
 
       console.log(this.address);
-      console.log(this.restaurentDetails);
+      console.log(this.restaurantDetails);
 
 
 
@@ -331,13 +331,13 @@ export class GooglemapPage implements OnInit {
   gotoWelcomPage() {
     this.alertService.showLoader('Please Wait ...');
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetails['customAddress'] = this.address;
-    JSON.parse(JSON.stringify(this.restaurentDetails));
+    this.restaurantDetails['customAddress'] = this.address;
+    JSON.parse(JSON.stringify(this.restaurantDetails));
 
 
-    // this.firestore.collection('Restaurent').add(JSON.parse(JSON.stringify(this.restaurentDetails))).then((docRef) => {
+    // this.firestore.collection('Restaurant').add(JSON.parse(JSON.stringify(this.restaurantDetails))).then((docRef) => {
     //   console.log('Document written with ID: ', docRef.id);
-    //   this.router.navigate(['/welcome'], { queryParams: { restaurent: docRef.id } });
+    //   this.router.navigate(['/welcome'], { queryParams: { restaurant: docRef.id } });
     // this.userDetail = JSON.parse(localStorage.getItem('user'));
 
     this.SetUserData(this.userDetail).then(() => {
@@ -360,7 +360,7 @@ export class GooglemapPage implements OnInit {
 
   SetUserData(userDetails) {
     // const userDetails = JSON.parse(localStorage.getItem('user'));
-    this.userDetail['Restaurent'] = this.restaurentDetails;
+    this.userDetail['Restaurant'] = this.restaurantDetails;
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${userDetails.uid}`);
 
     return userRef.set(JSON.parse(JSON.stringify(this.userDetail)), {

@@ -73,3 +73,9 @@ ion-button.full-with-btn{
   font-size: 14px;
 }
 .opacity-1{--placeholder-opacity: 1  !important;}
+
+.all-content-center{
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+}
