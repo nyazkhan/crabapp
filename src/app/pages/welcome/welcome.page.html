@@ -12,26 +12,30 @@
 
 
 
-    <!-- Restaurent Name -->
-    <ion-slide padding style=" vertical-align:top">
+    <!-- Restaurant Name -->
+    <ion-slide class="ion-padding " style=" vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="gotoGoogleMap()" name="arrow-back">
+        </ion-icon>
 
-      <h4 class="ion-text-center main-color ion-margin-bottom">Restaurent Detail</h4>
+      </div>
+      <h4 class="ion-text-center main-color ion-margin-bottom">Restaurant Detail</h4>
       <br>
       <br>
 
-      <ion-row>
+      <ion-row *ngIf="restaurantDetail.name">
         <ion-col padding>
           <h6 class="main-color bold ion-text-left" style="margin-bottom: 15px;">Restaurant name: </h6>
 
           <div class="full-border">
             <ion-input type="text" class="main-color bold" placeholder="Enter the Restaurant Name" autofocus
-              id="nameOfRest" [(ngModel)]="restaurentDetail.name" name="name"></ion-input>
+              id="nameOfRest" [(ngModel)]="restaurantDetail.name" name="name"></ion-input>
           </div>
           <br>
 
           <h6 class="ion-text-left">
             <span class="bold" style="font-size: 17px !important;line-height: 40px;">Restaurant Add: <br></span>
-            {{restaurentDetail?.formatted_address}}
+            {{restaurantDetail?.formatted_address}}
           </h6>
         </ion-col>
       </ion-row>
@@ -40,8 +44,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' [disabled]="(restaurantDetail?.name.length>1)'" (click)="next()"
-              class="full-with-btn  mt-20">NEXT
+            <ion-button expand="block" color='undefine' (click)="saveRestName()" class="full-with-btn  mt-20">NEXT
             </ion-button>
           </div>
         </ion-col>
@@ -53,7 +56,7 @@
 
 
     <!-- Food served in restaurant is -->
-    <ion-slide padding id="vegColor" style=" vertical-align:top">
+    <ion-slide class="ion-padding " id="vegColor" style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -103,7 +106,7 @@
 
 
     <!-- Type of Restaurant -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
 
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
@@ -147,7 +150,7 @@
 
 
     <!-- Payment Options -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -208,7 +211,7 @@
 
 
     <!-- You are open on -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -270,7 +273,7 @@
 
     <!-- Restaurant timing -->
 
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -299,7 +302,7 @@
           </ion-item>
         </ion-col>
 
-        <ion-col size="12" style="padding: 0;">
+        <ion-col size="12">
           <ion-item lines="none" color="undefine">
             <ion-label class="ion-text-center lable-font">to</ion-label>
           </ion-item>
@@ -317,54 +320,6 @@
       </ion-row>
       <ion-item-divider lines="none" color="undefine"></ion-item-divider>
       <br>
-      <!-- 
-      <ion-row>
-        <ion-col size="10">
-          <ion-item lines="none" color="undefine" class="full-border">
-            <ion-select placeholder="Please Select State" class="main-color">
-              <ion-select-option value="Sunday" [selected]="true">Sunday</ion-select-option>
-              <ion-select-option value="Monday">Monday</ion-select-option>
-              <ion-select-option value="Tuesday">Tuesday</ion-select-option>
-              <ion-select-option value="Wednesday">Wednesday</ion-select-option>
-              <ion-select-option value="Thursday">Thursday</ion-select-option>
-              <ion-select-option value="Friday">Friday</ion-select-option>
-              <ion-select-option value="Saturday">Saturday</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col size="2">
-          <ion-item lines="none" color="undefine" class="full-border" style="display: grid;
-          justify-content: center;">
-            <ion-label class="lable-font">
-              <ion-icon name="close"></ion-icon>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="5">
-          <ion-item lines="none" color="undefine" class="full-border">
-            <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z">
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-
-        <ion-col size="2" style="padding: 0;">
-          <ion-item lines="none" color="undefine">
-            <ion-label class="ion-text-center lable-font">to</ion-label>
-          </ion-item>
-        </ion-col>
-
-        <ion-col size="5">
-          <ion-item lines="none" color="undefine" class="full-border">
-            <ion-datetime class="main-color" display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z">
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
-
       <br>
       <br>
 
@@ -398,7 +353,7 @@
 
 
     <!-- Parking Area -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -446,7 +401,7 @@
 
 
     <!-- Accommodation size -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -467,11 +422,11 @@
 
       <br>
       <br>
-      <p *ngIf="restCapacity== 10">10 - 20 People at a time</p>
-      <p *ngIf="restCapacity== 20">20 - 30 People at a time</p>
-      <p *ngIf="restCapacity== 30">30 - 40 People at a time</p>
-      <p *ngIf="restCapacity== 40">40 - 50 People at a time</p>
-      <p *ngIf="restCapacity== 50">More then 50 People at a time</p>
+      <p *ngIf="(restCapacity == 10)">10 - 20 People at a time</p>
+      <p *ngIf="(restCapacity == 20)">20 - 30 People at a time</p>
+      <p *ngIf="(restCapacity == 30)">30 - 40 People at a time</p>
+      <p *ngIf="(restCapacity == 40)">40 - 50 People at a time</p>
+      <p *ngIf="(restCapacity == 50)">More then 50 People at a time</p>
 
 
       <ion-item lines="none" color="undefine">
@@ -488,8 +443,6 @@
             </ion-button>
           </div>
         </ion-col>
-
-
       </ion-row>
     </ion-slide>
 
@@ -497,7 +450,7 @@
 
 
     <!-- Average cost per person -->
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -526,16 +479,7 @@
         <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="restCost" snaps color="danger">
         </ion-range>
       </ion-item>
-      <!-- <ion-row>
-        <ion-col padding>
-          <ion-item lines="none" color="undefine" class="full-border">
-            <ion-select placeholder="Please Select State" class="main-color">
-              <ion-select-option value="150 INR" [selected]="true">150 INR</ion-select-option>
-              <ion-select-option value="250 INR">250 INR</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
+
 
       <ion-row>
         <ion-col padding>
@@ -551,17 +495,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
 
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
@@ -581,7 +515,7 @@
       </ion-grid>
 
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="undefine" class="main-color" (click)="presentActionSheetForCamera()">
+        <ion-fab-button (click)="presentActionSheetForCamera()">
           <ion-icon name="images"></ion-icon>
         </ion-fab-button>
       </ion-fab>
@@ -598,35 +532,33 @@
 
 
     <!-- About your restaurant -->
-    <ion-slide padding style=" vertical-align:top">
-        <div class="ion-float-left main-color">
-          <ion-icon (click)="previous()" name="arrow-back">
-          </ion-icon>
+    <ion-slide class="ion-padding " style=" vertical-align:top">
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
 
-        </div>
-        <div padding>
-
-        <h4 class="ion-text-center main-color ">About your restaurant</h4>
-        <br>
-        <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurent" name="aboutRestaurent"
-          class="main-color full-border" autofocus auto-grow="true"
-          placeholder=" We love restaurants as much as you do. That’s why we’ve been..."></ion-textarea>
-        <br>
-        <ion-row>
-          <ion-col padding>
-            <div class="">
-              <ion-button expand="block" color='undefine' (click)="saveAboutRestaurent()" class="full-with-btn  mt-20">
-                PROCEED
-              </ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
       </div>
+
+      <h4 class="ion-text-center main-color ">About your restaurant</h4>
+      <br>
+      <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurant" name="aboutRestaurant"
+        class="main-color full-border" autofocus auto-grow="true"
+        placeholder=" We love restaurants as much as you do. That’s why we’ve been..."></ion-textarea>
+      <br>
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' (click)="saveAboutRestaurant()" class="full-with-btn  mt-20">
+              NEXT
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
     </ion-slide>
 
 
 
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
 
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
@@ -671,7 +603,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
 
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
@@ -709,9 +641,8 @@
     </ion-slide>
 
 
-    <ion-slide padding style=" vertical-align:top">
+    <ion-slide class="ion-padding " style=" vertical-align:top">
 
-      <!-- <h4 class=" thanks  ">Thank you </h4> -->
       <ion-row>
         <ion-col class="fire-logo">
 

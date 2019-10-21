@@ -31,7 +31,7 @@ export class PhotoService {
 
   takePictureFromGalry() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: true,
       correctOrientation: true,
@@ -44,7 +44,7 @@ export class PhotoService {
   }
   takePictureFromCamera() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       sourceType: this.camera.PictureSourceType.CAMERA,
       saveToPhotoAlbum: true,
       correctOrientation: true,

@@ -38,6 +38,7 @@ export class WelcomePage implements OnInit {
       },
       setTranslate() {
         const swiper = this;
+        // tslint:disable-next-line: no-shadowed-variable
         const { $, slides, rtlTranslate: rtl } = swiper;
         for (let i = 0; i < slides.length; i += 1) {
           const $slideEl = slides.eq(i);
@@ -64,7 +65,9 @@ export class WelcomePage implements OnInit {
 
           if (swiper.params.flipEffect.slideShadows) {
             // Set shadows
+            // tslint:disable-next-line: max-line-length
             let shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+            // tslint:disable-next-line: max-line-length
             let shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
             if (shadowBefore.length === 0) {
               shadowBefore = swiper.$(`<div class="swiper-slide-shadow-${swiper.isHorizontal() ? 'left' : 'top'}"></div>`);
@@ -98,6 +101,7 @@ export class WelcomePage implements OnInit {
             eventTriggered = true;
             swiper.animating = false;
             const triggerEvents = ['webkitTransitionEnd', 'transitionend'];
+            // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < triggerEvents.length; i += 1) {
               $wrapperEl.trigger(triggerEvents[i]);
             }
@@ -298,7 +302,14 @@ export class WelcomePage implements OnInit {
   }
 
 
+  saveRestName() {
+    if (this.restaurantDetail.name === '') {
+      this.alertService.showErrorAlert('Please Enter the Restaurant Name');
+      return;
+    }
+    this.next();
 
+  }
   saveFoodType() {
     // tslint:disable-next-line: no-string-literal
     this.restaurantDetail['foodType'] = this.foodType;
@@ -318,6 +329,7 @@ export class WelcomePage implements OnInit {
       this.alertService.showErrorAlert('Please Select Payment Option');
       return;
     }
+    // tslint:disable-next-line: no-string-literal
     this.restaurantDetail['paymentOption'] = this.paymentOption;
     this.next();
   }
@@ -357,6 +369,7 @@ export class WelcomePage implements OnInit {
       this.foodType.nonVeg = false;
       this.foodType.both = false;
       console.log(this.foodType);
+      // tslint:disable-next-line: object-literal-key-quotes
       $('#vegColor').css({ 'backgroundColor': '#03fa033d' });
 
       return;
@@ -367,6 +380,7 @@ export class WelcomePage implements OnInit {
       this.foodType.both = false;
       this.foodType.jain = false;
       console.log(this.foodType);
+            // tslint:disable-next-line: object-literal-key-quotes
       $('#vegColor').css({ 'backgroundColor': '#f4433630' });
 
       return;
@@ -377,6 +391,7 @@ export class WelcomePage implements OnInit {
       this.foodType.nonVeg = false;
       this.foodType.both = true;
       console.log(this.foodType);
+            // tslint:disable-next-line: object-literal-key-quotes
       $('#vegColor').css({ 'backgroundColor': '#f7faba61' });
 
       return;
@@ -490,6 +505,7 @@ export class WelcomePage implements OnInit {
       this.alertService.showErrorAlert('Please Upload Image');
       return;
     }
+    // tslint:disable-next-line: no-string-literal
     this.restaurantDetail['restImg'] = this.photoService.photos;
     this.next();
   }
@@ -556,7 +572,7 @@ export class WelcomePage implements OnInit {
   isValidEmail() {
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-    if (reg.test(this.email) == false) {
+    if (reg.test(this.email) === false) {
       // alert('Invalid Email Address');
       return false;
     }
@@ -576,7 +592,10 @@ export class WelcomePage implements OnInit {
     });
   }
 
+  gotoGoogleMap() {
+    this.router.navigate(['/googlemap'], { queryParams: { user: this.RestaurantId} });
 
+  }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
