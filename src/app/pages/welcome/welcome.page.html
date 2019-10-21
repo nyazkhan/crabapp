@@ -486,24 +486,27 @@
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
-
       </div>
+
       <h4 class="ion-text-center main-color  ion-margin-bottom">Average cost per person</h4>
       <br>
       <br>
-      <br>
-      <br>
-      <h1 class="cost">
-        {{restCost}} ₹
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <div class="round-box" style="margin: auto">
+            <img class="img-veg" src="assets/crown.svg">
+          </div>
+        </ion-col>
+      </ion-row>
 
-      </h1>
       <br>
       <br>
       <br>
+      <p class="cost">
+        {{restCost}}<span style="font-size: 5px !important;font-weight: normal;"> / per person</span>
+      </p>
       <br>
-      <br>
-      <br>
-      <br>
+    
       <ion-item lines="none" color="undefine">
         <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="capacity" snaps color="danger">
         </ion-range>
@@ -596,7 +599,7 @@
       <br>
       <ion-row>
         <ion-col padding>
-          <div class="fixed-btn">
+          <div class="">
             <ion-button expand="block" color='undefine' (click)="saveAboutRestaurent()" class="full-with-btn  mt-20">
               PROCEED
             </ion-button>

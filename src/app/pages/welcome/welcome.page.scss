@@ -28,8 +28,9 @@ ion-button.full-with-btn{
     border: 1px solid var(--main-font-color);
     border-radius: 4px;
     position:fixed;
-    bottom: 50px;
+    bottom: 20px;
     width: 85%;
+    letter-spacing: 1px;
 }
 .bold {
     font-weight: 500;
@@ -152,9 +153,9 @@ ion-select{
 }
 
 .cost {
-    transform: scale(4.2);
+    transform: scale(3.4);
     color: #c44829;
-
+    font-weight: bold;
 }
 
 .thanks {
