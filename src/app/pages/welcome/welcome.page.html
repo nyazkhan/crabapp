@@ -12,22 +12,30 @@
 
 
 
-    <!-- Restaurant Name -->
+    <!-- Restaurent Name -->
     <ion-slide padding style=" vertical-align:top">
-      <h4 class="ion-text-center main-color  ion-margin-bottom">Restaurant Name</h4>
+
+      <h4 class="ion-text-center main-color ion-margin-bottom">Restaurent Detail</h4>
       <br>
       <br>
-      <br>
-      <br>
-      <div>
-        <ion-input type="text" auto-grow="true" class="main-color bold" placeholder="Enter the Restaurant Name"
-          autofocus id="nameOfRest" [(ngModel)]="restaurantDetail.name" name="name"></ion-input>
-      </div>
-      <ion-item>
-        <ion-label position="stacked">Restaurant Address</ion-label>
-        Restaurant Address
-      </ion-item>
-      <ion-label class="ion-text-left main-color ">Restaurant Address</ion-label>
+
+      <ion-row>
+        <ion-col padding>
+          <h6 class="main-color bold ion-text-left" style="margin-bottom: 15px;">Restaurant name: </h6>
+
+          <div class="full-border">
+            <ion-input type="text" class="main-color bold" placeholder="Enter the Restaurant Name" autofocus
+              id="nameOfRest" [(ngModel)]="restaurentDetail.name" name="name"></ion-input>
+          </div>
+          <br>
+
+          <h6 class="ion-text-left">
+            <span class="bold" style="font-size: 17px !important;line-height: 40px;">Restaurant Add: <br></span>
+            {{restaurentDetail?.formatted_address}}
+          </h6>
+        </ion-col>
+      </ion-row>
+
 
       <ion-row>
         <ion-col padding>
@@ -163,19 +171,19 @@
         <ion-col>
           <ion-item-sliding padding>
             <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Cash</ion-label>
+              <ion-label class="toggle-lable" style="color:var(--main-font-color)">Cash</ion-label>
               <ion-toggle slot="end" [(ngModel)]="paymentOption.cash" name="cash" color="danger" checked></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Credit / Debit Card</ion-label>
+              <ion-label class="toggle-lable" style="color:var(--main-font-color)">Credit / Debit Card</ion-label>
               <ion-toggle slot="end" [(ngModel)]="paymentOption.credit" name="credit" color="danger"></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">Paytm</ion-label>
+              <ion-label class="toggle-lable" style="color:var(--main-font-color)">Paytm</ion-label>
               <ion-toggle slot="end" [(ngModel)]="paymentOption.paytm" name="paytm" color="danger"></ion-toggle>
             </ion-item>
             <ion-item lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">
+              <ion-label class="toggle-lable" style="color:var(--main-font-color)">
                 UPI Payment
                 <br>
                 <p style="font-size: 12px;margin-top:5px;">Google pay / Phonepay / Paytm UPI etc</p>
@@ -213,7 +221,7 @@
         <ion-col>
           <ion-item-sliding padding>
             <ion-item *ngFor="let days of openOn" lines="none" color="undefine" class="bot-border">
-              <ion-label class="toggle-lable" style="color:#c44829">{{days.day}}</ion-label>
+              <ion-label class="toggle-lable" style="color:var(--main-font-color)">{{days.day}}</ion-label>
               <ion-toggle slot="end" [(ngModel)]="days.isOpen" name="monday" color="danger" checked></ion-toggle>
             </ion-item>
             <!-- <ion-item lines="none" color="undefine" class="bot-border">
@@ -268,6 +276,7 @@
         </ion-icon>
 
       </div>
+
       <h4 class="ion-text-center  main-color  ion-margin-bottom">Restaurant timing</h4>
       <br>
       <div padding style="display:flex" class="all-content-center">
@@ -590,29 +599,32 @@
 
     <!-- About your restaurant -->
     <ion-slide padding style=" vertical-align:top">
+        <div class="ion-float-left main-color">
+          <ion-icon (click)="previous()" name="arrow-back">
+          </ion-icon>
 
-      <div class="ion-float-left main-color">
-        <ion-icon (click)="previous()" name="arrow-back">
-        </ion-icon>
+        </div>
+        <div padding>
 
+        <h4 class="ion-text-center main-color ">About your restaurant</h4>
+        <br>
+        <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurent" name="aboutRestaurent"
+          class="main-color full-border" autofocus auto-grow="true"
+          placeholder=" We love restaurants as much as you do. That’s why we’ve been..."></ion-textarea>
+        <br>
+        <ion-row>
+          <ion-col padding>
+            <div class="">
+              <ion-button expand="block" color='undefine' (click)="saveAboutRestaurent()" class="full-with-btn  mt-20">
+                PROCEED
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
       </div>
-      <h4 class="ion-text-center main-color ">About your restaurant</h4>
-
-      <ion-textarea [(ngModel)]="aboutRestaurant" name="aboutRestaurant" class="main-color bold " autofocus
-        auto-grow="true" placeholder=" We love restaurants as much as you do. That’s why we’ve been helping them fill tables since 1999. Whether you’re
-        browsing for a quick bite or planning a big night, We will help you discover the perfect dining experience. Your
-        new favorite restaurant is out there – go ahead, dig in!"></ion-textarea>
-      <br>
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="saveAboutRestaurant()" class="full-with-btn  mt-20">
-              NEXT
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
     </ion-slide>
+
+
 
     <ion-slide padding style=" vertical-align:top">
 
