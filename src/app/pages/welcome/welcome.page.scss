@@ -6,7 +6,7 @@ ion-slides{
 ion-slide{
     padding-top: 30px;
     display: block;
-    background-color: #ffeee0;
+    -background-color: #ffeee0;
 }
 ion-slide.swiper-slide {
     align-items: flex-start;
@@ -22,7 +22,7 @@ ion-slide.swiper-slide {
 }
 ion-button.full-with-btn{
     background-color: var(--main-font-color);
-    color: #fff;
+    color:var(--main-white-color);
     font-size: 14px;
     height: 45px;
     border: 1px solid var(--main-font-color);
@@ -37,10 +37,10 @@ ion-button.full-with-btn{
   }
 
 .round-box{
-    border:1px solid #fff;
+    // -border:1px solid var(--main-white-color);
     height: 170px;
     width: 170px;
-    background-color: #fff;
+    background-color: var(--main-white-color);
     border-radius: 50%;
     box-shadow:0 0 0px 30px #fff8f1;
     position: relative;
@@ -48,21 +48,20 @@ ion-button.full-with-btn{
     display: flex;
     justify-content: center;
 }
-.round-box-dark{
-    border:1px solid #f6d5c4;
-    height: 210px;
-    width: 210px;
-    background-color: #f6d5c4;
-    border-radius: 50%;
-    box-shadow:0 0 0px 25px #fce6d7;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
-.round-box .img-veg{
-    -border:1px solid red
-}
+// .round-box-dark{
+//     height: 210px;
+//     width: 210px;
+//     background-color: #f6d5c4;
+//     border-radius: 50%;
+//     box-shadow:0 0 0px 25px #fce6d7;
+//     position: relative;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: center;
+// }
+// .round-box .img-veg{
+//     -border:1px solid red
+// }
 
 .tab-menu{
     display: inline-flex;
@@ -107,17 +106,17 @@ ion-button.full-with-btn{
   margin-top:20px;
 }
 .full-border{
-    border:1px solid #f1d7d7;
+    border:1px solid var(--main-border-color);
     border-radius: 6px;
 }
 .bot-border{
-    border-bottom:1px solid #f1d7d7;
+    border-bottom:1px solid var(--main-border-color);
 }
 .toggle-label{
     color: var(--main-font-color) !important;
 }
 .day-square-btn{
-    border: 1px solid #ECD5C2;
+    border: 1px solid var(--main-border-color);
     color: var(--main-font-color);
     box-shadow: none;
     border-radius: 6px;
@@ -134,7 +133,7 @@ ion-button.full-with-btn{
 }
 ion-range {
     --pin-background: black;
-    --pin-color: red;
+    --pin-color: var(--main-font-color);   
     width: var(--knob-handle-size);
     height: var(--knob-handle-size);
 }
@@ -143,7 +142,7 @@ ion-select{
 }
 .day-active{
     background-color:var(--main-font-color);
-    color:#fff;
+    color:var(--main-white-color);
 }
 
 .img-upi {
@@ -154,13 +153,13 @@ ion-select{
 
 .cost {
     transform: scale(3.4);
-    color: #c44829;
+    color: var(--main-font-color);
     font-weight: bold;
 }
 
 .thanks {
     transform: scale(2.2);
-    color: #c44829;
+    color: var(--main-font-color);
 
 }
 
@@ -170,13 +169,13 @@ ion-select{
         position: absolute;
         right: 5px;
         padding: 5px;
-        background: #c44829;
-        color: #ffeee0;
+        background: var(--main-font-color);
+        color:  var(--main-white-color);
     }
 }
 
 .stylist-input{
-    border: 1px solid #f1d7d7;
+    border: 1px solid var(--main-border-color);
     border-radius: 6px;
     font-size: 15px;
     color: var(--main-font-color);
