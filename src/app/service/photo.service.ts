@@ -11,26 +11,8 @@ export class PhotoService {
 
   constructor(private camera: Camera, private storage: Storage) { }
 
-  takePicture() {
-    const options: CameraOptions = {
-      // quality: 50,
-      // destinationType: this.camera.DestinationType.DATA_URL,
-      // encodingType: this.camera.EncodingType.PNG,
-      // mediaType: this.camera.MediaType.PICTURE
-      // destinationType: this.camera.DestinationType.FILE_URI,
-      // sourceType: sourceType,
-      // mediaType: this.camera.MediaType.PICTURE,
-      // encodingType: this.camera.EncodingType.JPEG,
-      // saveToPhotoAlbum: (source === PictureSource.CAMERA),
-      quality: 100,
-      // sourceType: this.camera.PictureSourceType.,
-      saveToPhotoAlbum: true,
-      correctOrientation: true,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 400,
-      targetHeight: 400,
-      allowEdit: true
-    };
+  takePicture(options) {
+
 
     this.camera.getPicture(options).then((imageData) => {
       // Add new photo to gallery
@@ -47,6 +29,32 @@ export class PhotoService {
 
   }
 
+  takePictureFromGalry() {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: true,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 400,
+      targetHeight: 400,
+      allowEdit: true
+    };
+    this.takePicture(options);
+  }
+  takePictureFromCamera() {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      saveToPhotoAlbum: true,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 400,
+      targetHeight: 400,
+      allowEdit: true
+    };
+    this.takePicture(options);
+  }
   removePicture(data) {
     this.photos.splice(this.photos.indexOf(data), 1);
     this.storage.set('photos', this.photos);

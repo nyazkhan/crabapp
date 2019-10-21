@@ -329,8 +329,26 @@ export class GooglemapPage implements OnInit {
 
 
   gotoWelcomPage() {
-    this.alertService.showLoader('Please Wait ...');
     // tslint:disable-next-line: no-string-literal
+    // debugger;
+    if (this.address.address.length < 2) {
+      this.alertService.showErrorAlert('Please Fill Premise No');
+      return;
+    }
+
+    if (this.address.locality.length < 2) {
+      this.alertService.showErrorAlert('Please Fill Locality');
+      return;
+    }
+
+    if (this.address.landMark.length < 2) {
+      this.alertService.showErrorAlert('Please Fill LandMark');
+      return;
+    }
+    if (this.address.city.length < 2) {
+      this.alertService.showErrorAlert('Please Fill City');
+      return;
+    }
     this.restaurantDetails['customAddress'] = this.address;
     JSON.parse(JSON.stringify(this.restaurantDetails));
 
@@ -340,6 +358,7 @@ export class GooglemapPage implements OnInit {
     //   this.router.navigate(['/welcome'], { queryParams: { restaurant: docRef.id } });
     // this.userDetail = JSON.parse(localStorage.getItem('user'));
 
+    this.alertService.showLoader('Please Wait ...');
     this.SetUserData(this.userDetail).then(() => {
       console.log(this.userDetail);
 

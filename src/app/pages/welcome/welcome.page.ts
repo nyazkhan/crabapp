@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { IonSlides, AlertController } from '@ionic/angular';
+import { IonSlides, AlertController, ActionSheetController } from '@ionic/angular';
 import { PhotoService } from 'src/app/service/photo.service';
 import { AlertService } from 'src/app/service/alert.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -191,6 +191,7 @@ export class WelcomePage implements OnInit {
     @Inject(AngularFirestore) private firestore: AngularFirestore,
     @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
     @Inject(AlertService) private alertService: AlertService,
+    public actionSheetController: ActionSheetController,
 
   ) {
     this.subscribeRouteChanges();
@@ -312,6 +313,11 @@ export class WelcomePage implements OnInit {
 
   savePaymentType() {
     // tslint:disable-next-line: no-string-literal
+
+    if (!(this.paymentOption.cash || this.paymentOption.credit || this.paymentOption.paytm || this.paymentOption.upi)) {
+      this.alertService.showErrorAlert('Please Select Payment Option');
+      return;
+    }
     this.restaurantDetail['paymentOption'] = this.paymentOption;
     this.next();
   }
@@ -480,6 +486,10 @@ export class WelcomePage implements OnInit {
 
   }
   saveImg() {
+    if (this.photoService.photos.length < 1) {
+      this.alertService.showErrorAlert('Please Upload Image');
+      return;
+    }
     this.restaurantDetail['restImg'] = this.photoService.photos;
     this.next();
   }
@@ -564,6 +574,62 @@ export class WelcomePage implements OnInit {
       // An error happened.
       this.alertService.showErrorAlert(error);
     });
+  }
+
+
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      // header: '',
+      buttons: [{
+        text: 'Log Out',
+        role: 'destructive',
+        icon: 'log-out',
+        handler: () => {
+          console.log('Delete clicked');
+          this.logOut();
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  async presentActionSheetForCamera() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      buttons: [{
+        text: 'Take Picture',
+        // role: 'destructive',
+        icon: 'camera',
+        handler: () => {
+
+          this.photoService.takePictureFromCamera();
+        }
+      }, {
+        text: 'Gallery',
+        // role: 'destructive',
+        icon: 'images',
+        handler: () => {
+
+          this.photoService.takePictureFromGalry();
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 }

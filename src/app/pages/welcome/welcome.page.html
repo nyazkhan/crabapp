@@ -1,4 +1,9 @@
 <ion-content class="main-background">
+  <ion-fab vertical="top" size="small" horizontal="end" slot="fixed">
+    <ion-fab-button color="undefine" class="main-color" (click)="presentActionSheet()">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-slides options="myOptions" class="swiper-no-swiping">
 
 
@@ -9,26 +14,25 @@
 
     <!-- Restaurant Name -->
     <ion-slide padding style=" vertical-align:top">
-
       <h4 class="ion-text-center main-color  ion-margin-bottom">Restaurant Name</h4>
       <br>
       <br>
       <br>
       <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
       <div>
-        <ion-input type="text" class="main-color bold" placeholder="Enter the Restaurant Name" autofocus id="nameOfRest"
-          [(ngModel)]="restaurantDetail.name" name="name"></ion-input>
+        <ion-input type="text" auto-grow="true" class="main-color bold" placeholder="Enter the Restaurant Name"
+          autofocus id="nameOfRest" [(ngModel)]="restaurantDetail.name" name="name"></ion-input>
       </div>
+      <ion-item>
+        <ion-label position="stacked">Restaurant Address</ion-label>
+        Restaurant Address
+      </ion-item>
+      <ion-label class="ion-text-left main-color ">Restaurant Address</ion-label>
 
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' [disabled]="restaurantDetail?.name ==''" (click)="next()"
+            <ion-button expand="block" color='undefine' [disabled]="(restaurantDetail?.name.length>1)'" (click)="next()"
               class="full-with-btn  mt-20">NEXT
             </ion-button>
           </div>
@@ -460,10 +464,12 @@
       <p *ngIf="restCapacity== 40">40 - 50 People at a time</p>
       <p *ngIf="restCapacity== 50">More then 50 People at a time</p>
 
+
       <ion-item lines="none" color="undefine">
-        <ion-range min="10" max="50" step="10" [(ngModel)]="restCapacity" name="capacity" snaps color="danger">
+        <ion-range min="10" max="50" step="10" [(ngModel)]="restCapacity" name="restCapacity" snaps color="danger">
         </ion-range>
       </ion-item>
+
 
       <ion-row>
         <ion-col padding>
@@ -486,26 +492,29 @@
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
-
       </div>
+
       <h4 class="ion-text-center main-color  ion-margin-bottom">Average cost per person</h4>
       <br>
       <br>
-      <br>
-      <br>
-      <h1 class="cost">
-        {{restCost}} ₹
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <div class="round-box" style="margin: auto">
+            <img class="img-veg" src="assets/crown.svg">
+          </div>
+        </ion-col>
+      </ion-row>
 
-      </h1>
       <br>
       <br>
       <br>
+      <p class="cost">
+        {{restCost}}<span style="font-size: 5px !important;font-weight: normal;"> / per person</span>
+      </p>
       <br>
-      <br>
-      <br>
-      <br>
+
       <ion-item lines="none" color="undefine">
-        <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="capacity" snaps color="danger">
+        <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="restCost" snaps color="danger">
         </ion-range>
       </ion-item>
       <!-- <ion-row>
@@ -563,8 +572,8 @@
       </ion-grid>
 
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="photoService.takePicture()">
-          <ion-icon name="camera"></ion-icon>
+        <ion-fab-button color="undefine" class="main-color" (click)="presentActionSheetForCamera()">
+          <ion-icon name="images"></ion-icon>
         </ion-fab-button>
       </ion-fab>
       <ion-row>
@@ -629,7 +638,7 @@
         <ion-col>
           <ion-item class="stylist-input" lines="none" color="undefine">
             <ion-label slot="end" style="font-size: 12px;">Email Id</ion-label>
-            <ion-input class="opacity-1" type="text"  name="email" [(ngModel)]="email">
+            <ion-input class="opacity-1" type="text" name="email" [(ngModel)]="email">
             </ion-input>
           </ion-item>
         </ion-col>
