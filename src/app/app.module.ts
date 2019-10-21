@@ -16,6 +16,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 @NgModule({
   declarations: [AppComponent,
     ErrorComponent],
@@ -24,12 +25,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.config),
     AngularFirestoreModule,
     IonicStorageModule.forRoot(),
+    AngularFireAuthModule,
+
     IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
     CommanService,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     FirebaseAuthentication,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

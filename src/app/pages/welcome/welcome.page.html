@@ -21,14 +21,15 @@
       <br>
 
       <div>
-        <ion-input type="text" class="main-color bold" placeholder="Enter the Restaurant Name" autofocus id="nameOfRest" [(ngModel)]="restaurentDetail.name"
-          name="name"></ion-input>
+        <ion-input type="text" class="main-color bold" placeholder="Enter the Restaurant Name" autofocus id="nameOfRest"
+          [(ngModel)]="restaurentDetail.name" name="name"></ion-input>
       </div>
 
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' [disabled]="restaurentDetail?.name ==''" (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' [disabled]="restaurentDetail?.name ==''" (click)="next()"
+              class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -69,7 +70,8 @@
         <ion-col padding>
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Jain preparation available</ion-label>
-            <ion-toggle class="ion-float-right" [(ngModel)]="foodType.jain" slot="end" name="jain" color="danger" checked></ion-toggle>
+            <ion-toggle class="ion-float-right" [(ngModel)]="foodType.jain" slot="end" name="jain" color="danger"
+              checked></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -112,7 +114,8 @@
       <ion-row class="list tab-menu">
         <ion-col (click)="addClassInRestType( 'cafe')" [ngClass]="(restType.cafe)?'item font-active':'item '">Cafe
         </ion-col>
-        <ion-col (click)="addClassInRestType( 'restaurent')" [ngClass]="(restType.restaurent)?'item font-active':'item '">
+        <ion-col (click)="addClassInRestType( 'restaurent')"
+          [ngClass]="(restType.restaurent)?'item font-active':'item '">
           Restaurent</ion-col>
         <ion-col (click)="addClassInRestType( 'both')" [ngClass]="(restType.both)?'item font-active':'item '">Both
         </ion-col>
@@ -264,8 +267,9 @@
       <h4 class="ion-text-center  main-color  ion-margin-bottom">Restaurant timing</h4>
       <br>
       <div padding style="display:flex" class="all-content-center">
-        <div *ngFor="let days of selectedDays; let i = index;">
-          <ion-button size="small" color="undefine" (click)=" sendDay(days); curentDay = i" [ngClass]="(curentDay ==i)?' day-square-btn day-active': 'day-square-btn'">
+        <div *ngFor="let days of openOn; let i = index;">
+          <ion-button *ngIf="days.isOpen" size="small" color="undefine" (click)=" sendDay(days); curentDay = i"
+            [ngClass]="(curentDay ==i)?' day-square-btn day-active': 'day-square-btn'">
             {{days.day.substring(0, 1)}}</ion-button>
         </div>
       </div>
@@ -275,8 +279,9 @@
         <ion-col size="12">
           <ion-item lines="none" color="undefine" class="full-border">
 
-            <ion-datetime class="main-color" display-format="hh:mm A" placeholder="Select Opening time" picker-format="hh:mm A" (ionChange)="openTime(selectedDayTime.open)"
-              [(ngModel)]="selectedDayTime.open" name="open">
+            <ion-datetime class="main-color" display-format="hh:mm A" placeholder="Select Opening time"
+              picker-format="hh:mm A" (ionChange)="openTime(selectedDayTime.open)" [(ngModel)]="selectedDayTime.open"
+              name="open">
             </ion-datetime>
           </ion-item>
         </ion-col>
@@ -289,8 +294,9 @@
 
         <ion-col size="12">
           <ion-item lines="none" color="undefine" class="full-border">
-            <ion-datetime [disabled]="selectedDayTime.open==''" class="main-color" display-format="hh:mm A" [(ngModel)]="selectedDayTime.close"
-              (ionChange)="closeTime(selectedDayTime.close)" placeholder="Select Closing Time" picker-format="hh:mm A" name="close">
+            <ion-datetime [disabled]="selectedDayTime.open==''" class="main-color" display-format="hh:mm A"
+              [(ngModel)]="selectedDayTime.close" (ionChange)="closeTime(selectedDayTime.close)"
+              placeholder="Select Closing Time" picker-format="hh:mm A" name="close">
             </ion-datetime>
           </ion-item>
         </ion-col>
@@ -353,8 +359,8 @@
         <ion-col padding>
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Same Timing For All Day</ion-label>
-            <ion-toggle class="ion-float-right" [(ngModel)]="sameTimeForAll" (click)="setSametimeForAll(sameTimeForAll)" slot="end" name="sameTime"
-              color="danger" checked>
+            <ion-toggle class="ion-float-right" [(ngModel)]="sameTimeForAll" (click)="setSametimeForAll(sameTimeForAll)"
+              slot="end" name="sameTime" color="danger" checked>
             </ion-toggle>
           </div>
         </ion-col>
@@ -364,7 +370,8 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)=" checkForRequiredFieldOnDay(); " class="full-with-btn  mt-20">
+            <ion-button expand="block" color='undefine' (click)=" checkForRequiredFieldOnDay(); "
+              class="full-with-btn  mt-20">
               PROCEED
             </ion-button>
           </div>
@@ -402,7 +409,8 @@
         <ion-col padding>
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Parking is available</ion-label>
-            <ion-toggle class="ion-float-right" name="parking" [(ngModel)]="parking" slot="end" name="apple" color="danger" checked></ion-toggle>
+            <ion-toggle class="ion-float-right" name="parking" [(ngModel)]="parking" slot="end" name="apple"
+              color="danger" checked></ion-toggle>
           </div>
         </ion-col>
       </ion-row>
@@ -438,7 +446,7 @@
         <ion-col class="ion-margin-top">
           <div class="round-box" style="margin: auto">
             <img class="img-logo" src="assets/tables.svg">
-            <img *ngIf="restCapacity== 30" class="img-logo" src="assets/tables.svg">
+            <img *ngIf="restCapacity>= 30" class="img-logo" src="assets/tables.svg">
             <img *ngIf="restCapacity== 50" class="img-logo" src="assets/tables.svg">
           </div>
         </ion-col>
@@ -460,7 +468,8 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="SaveRestCapacity()" class="full-with-btn  mt-20">
+              PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -485,7 +494,7 @@
       <br>
       <br>
       <h1 class="cost">
-        {{restCapacity}} ₹
+        {{restCost}} ₹
 
       </h1>
       <br>
@@ -496,7 +505,7 @@
       <br>
       <br>
       <ion-item lines="none" color="undefine">
-        <ion-range min="50" max="500" step="50" [(ngModel)]="restCapacity" name="capacity" snaps color="danger">
+        <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="capacity" snaps color="danger">
         </ion-range>
       </ion-item>
       <!-- <ion-row>
@@ -513,7 +522,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="saveCost()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -532,35 +541,6 @@
 
 
 
-
-
-
-
-
-    <!-- About your restaurant -->
-    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
-
-      <div class="ion-float-left main-color">
-        <ion-icon (click)="previous()" name="arrow-back">
-        </ion-icon>
-
-      </div>
-      <h4 class="ion-text-center main-color ">About your restaurant</h4>
-
-      <ion-textarea [(ngModel)]="aboutRestaurent" name="aboutRestaurent" class="main-color bold " autofocus auto-grow="true" placeholder=" We love restaurants as much as you do. That’s why we’ve been helping them fill tables since 1999. Whether you’re
-        browsing for a quick bite or planning a big night, We will help you discover the perfect dining experience. Your
-        new favorite restaurant is out there – go ahead, dig in!"></ion-textarea>
-      <br>
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="saveAboutRestaurent()" class="full-with-btn  mt-20">
-              PROCEED
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
 
 
     <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
@@ -573,7 +553,7 @@
       <h4 class="ion-text-center  main-color ">Menu and restaurant img</h4>
       <ion-grid>
         <ion-row>
-          <ion-col class="menu-img" col-6 *ngFor="let photo of photoService.photos">
+          <ion-col size="6" class="menu-img" *ngFor="let photo of photoService.photos">
             <button class="rm-btn" (click)="photoService.removePicture(photo.data)">
               <span>&#10005;</span>
             </button>
@@ -590,7 +570,7 @@
       <ion-row>
         <ion-col padding>
           <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="showDetails()" class="full-with-btn  mt-20">PROCEED
+            <ion-button expand="block" color='undefine' (click)="saveImg()" class="full-with-btn  mt-20">PROCEED
             </ion-button>
           </div>
         </ion-col>
@@ -598,6 +578,144 @@
     </ion-slide>
 
 
+
+    <!-- About your restaurant -->
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
+      <h4 class="ion-text-center main-color ">About your restaurant</h4>
+
+      <ion-textarea [(ngModel)]="aboutRestaurent" name="aboutRestaurent" class="main-color bold " autofocus
+        auto-grow="true" placeholder=" We love restaurants as much as you do. That’s why we’ve been helping them fill tables since 1999. Whether you’re
+        browsing for a quick bite or planning a big night, We will help you discover the perfect dining experience. Your
+        new favorite restaurant is out there – go ahead, dig in!"></ion-textarea>
+      <br>
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' (click)="saveAboutRestaurent()" class="full-with-btn  mt-20">
+              PROCEED
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
+      <ion-row>
+        <ion-col class="fire-logo">
+
+          <h1 style="font-size: xx-large" class="main-color btn-color ion-no-margin ion-text-center ion-margin-vertical"
+            style="margin: 0 !important;">
+            One Last Step </h1>
+
+          <img src="assets/welcome.png" class="img-logo">
+
+          <p style="font-size: 18px !important" class="ion-text-center bold">Connect to your Email</p>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item class="stylist-input" lines="none" color="undefine">
+            <ion-label slot="end" style="font-size: 12px;">Email Id</ion-label>
+            <ion-input class="opacity-1" type="text"  name="email" [(ngModel)]="email">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button *ngIf="!userDetails.emailVerified" expand="block" color='undefine'
+              (click)="sendEmailVerifycatioLink()" [disabled]="!isValidEmail()" class="full-with-btn  mt-20"> Verify
+              Email
+            </ion-button>
+            <ion-button *ngIf="userDetails.emailVerified" expand="block" color='undefine' (click)="next()"
+              class="full-with-btn  mt-20">PROCEED
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+
+      <div class="ion-float-left main-color">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+
+      </div>
+      <ion-row>
+        <ion-col class="fire-logo">
+
+          <h1 style="font-size: xx-large" class="main-color btn-color ion-no-margin ion-text-center ion-margin-vertical"
+            style="margin: 0 !important;">
+            One Last Step </h1>
+
+          <img src="assets/welcome.png" class="img-logo">
+
+          <p style="font-size: 18px !important" class="ion-text-center bold">Please Verify Your Email ID</p>
+          <p style="font-size: 16px !important" class="ion-text-center ">We have sent you a link on</p>
+          <p style="font-size: 16px !important" class="ion-text-center bold">{{userDetails.email}}</p>
+          <p style="font-size: 12px !important" class="ion-text-center ">please click on that link to verify your email
+            id then open the app again</p>
+
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+
+            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">PROCEED
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+
+    <ion-slide padding style="background-color: #ffeee0; vertical-align:top">
+
+      <!-- <h4 class=" thanks  ">Thank you </h4> -->
+      <ion-row>
+        <ion-col class="fire-logo">
+
+          <h1 style="font-size: xx-large" class="main-color btn-color ion-no-margin ion-text-center ion-margin-vertical"
+            style="margin: 0 !important;">
+            Thankyou for Joining </h1>
+
+          <img src="assets/welcome.png" class="img-logo">
+
+          <p style="font-size: 18px !important" class="ion-text-center bold">We'll Be Back Soon</p>
+          <br>
+          <p style="font-size: 14px !important" class="ion-text-center bold">What can you expect from us</p>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col padding>
+          <div class="fixed-btn">
+            <ion-button expand="block" color='undefine' (click)="logOut()" class="full-with-btn  mt-20">Log Out
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
 
 
 

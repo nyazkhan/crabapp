@@ -4,7 +4,6 @@
   <div class="main ion-no-margin" style="background-color: #ffeee0;">
     <ion-row *ngIf="!otpSend" padding class="ion-no-margin">
       <ion-col padding>
-        <div id="recaptcha"></div>
 
         <ion-row>
           <ion-col class="fire-logo">
@@ -23,8 +22,8 @@
         <ion-row>
           <ion-col>
             <ion-item class="stylist-input" lines="none" color="undefine">
-              <ion-label slot="end">Mobile Number</ion-label>
-              <ion-input class="opacity-1" type="text" (keyup)="phoneValidation(phoneNo)" name="phoneNo"
+              <ion-label slot="end" style="font-size: 12px;">Mobile Number</ion-label>
+              <ion-input class="opacity-1" type="number" (keydown)="isValidNumber($event)" (keyup)="phoneValidation()" name="phoneNo"
                 [(ngModel)]="phoneNo">
               </ion-input>
             </ion-item>
@@ -37,16 +36,20 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" [disabled]="error" (click)="login()" color='undefine'
+            <ion-button expand="block" [disabled]="error" (click)="onSignInSubmit()" color='undefine'
               class="full-with-btn  mt-20 transition">Send
               OTP</ion-button>
           </ion-col>
         </ion-row>
-
+        <ion-row>
+          <ion-col>
+            <div id="recaptcha"></div>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
             <ion-text class="ion-text-center block btn-color">Already have an Acount ?
-              <span class="bold btn-color" routerLink="/signup">SIGN IN</span></ion-text>
+              <span class="bold btn-color">SIGN IN</span></ion-text>
           </ion-col>
         </ion-row>
 
@@ -62,7 +65,7 @@
         <p class="bold">OTP recive on</p>
         <ion-row>
           <ion-col>
-            <ion-text class="block btn-color"><span class="ion-float-left">+91 8925014789</span>
+            <ion-text class="block btn-color"><span class="ion-float-left" (click)="signOut()">+91 {{phoneNo}}</span>
               <span style="float: right;" class="btn-color" (click)="otpSend= false">Change</span></ion-text>
           </ion-col>
         </ion-row>
@@ -96,7 +99,7 @@
         </ion-row> -->
         <ion-item class="stylist-input" lines="none" color="undefine">
           <ion-label slot="end">OTP</ion-label>
-          <ion-input class="opacity-1" placeholder="Mobile No"></ion-input>
+          <ion-input class="opacity-1" [(ngModel)]="otp" name="otp" placeholder="OTP"></ion-input>
         </ion-item>
 
         <!-- <ion-row>
@@ -108,7 +111,8 @@
         </ion-row> -->
         <ion-row>
           <ion-col>
-            <ion-button expand="block" (click)="login()" color='undefine' class="full-with-btn  mt-20 transition">Send
+            <ion-button expand="block" (click)="otpSummit()" color='undefine' class="full-with-btn  mt-20 transition">
+              Send
               OTP</ion-button>
           </ion-col>
         </ion-row>
@@ -120,10 +124,10 @@
         <br>
         <ion-row>
           <ion-col>
-            <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in
-                60 seconds</span>
+            <!-- <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in
+                {{timmerCountOtp}} seconds</span>
               <span style="float: right;" class="bold btn-color" (click)="resendOtp()"><img src="assets/refresh.svg"
-                  class="img-logo"> RESEND OTP</span></ion-text>
+                  class="img-logo"> RESEND OTP</span></ion-text> -->
           </ion-col>
         </ion-row>
       </div>

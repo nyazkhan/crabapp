@@ -1,9 +1,10 @@
 import { Component, NgZone, ElementRef, ViewChild, Inject, AfterViewInit, OnInit } from '@angular/core';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
-import { PopoverController, LoadingController } from '@ionic/angular';
+import { PopoverController, LoadingController, AlertController } from '@ionic/angular';
 import { CommanService } from 'src/app/service/comman.service';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
 // import { PopoverPage } from './address-popover/address-popover';
 // import { RestaurentAddress } from 'src/app/class/restaurent';
 declare const google: any;
@@ -26,17 +27,16 @@ export class GooglemapPage implements OnInit {
   markers: any = [];
 
   MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
-  address: any = {};
-  // = {
-  //   address: '',
-  //   locality: '',
-  //   landMark: '',
-  //   state: '',
-  //   city: '',
-  //   distic: '',
-  //   country: '',
-  //   pincode: null,
-  // };
+  address = {
+    address: '',
+    locality: '',
+    landMark: '',
+    state: '',
+    city: '',
+    distic: '',
+    country: '',
+    pincode: null,
+  };
 
   addressForm;
 
@@ -52,8 +52,9 @@ export class GooglemapPage implements OnInit {
     postal_code: 'short_name'
   };
   restaurentDetails: any = [];
-
+  userUid: any;
   input: any;
+  userDetail: any;
   constructor(
     @Inject(Geolocation) public geolocation: Geolocation,
     public popoverCtrl: PopoverController,
@@ -61,10 +62,65 @@ export class GooglemapPage implements OnInit {
     @Inject(CommanService) public commanService: CommanService,
     @Inject(AngularFirestore) public firestore: AngularFirestore,
     @Inject(Router) private router: Router,
+    @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
+    public alertController: AlertController,
+    @Inject(AlertService) private alertService: AlertService,
 
   ) {
+    this.alertService.showLoader('Google Map is Loading..');
+    this.subscribeRouteChanges();
+
   }
 
+
+  subscribeRouteChanges() {
+
+    this.activatedRoute.queryParams
+      .subscribe((e: Params) => {
+        // tslint:disable-next-line: radix
+
+        console.log(e);
+
+        this.userUid = e.user;
+        this.getUserById(this.userUid);
+
+
+      }, (err: any) => {
+        this.router.navigate(['/login']);
+      });
+
+  }
+  getUserById(id) {
+    this.firestore.collection('users').doc(id).get().subscribe(doc => {
+      console.log(doc.data());
+      this.userDetail = doc.data();
+      if (this.userDetail.Restaurent) {
+        this.changeMapHieght('50vh');
+        // this.initAutocomplete();
+        this.restaurentDetails = this.userDetail.Restaurent;
+        this.address = this.restaurentDetails.customAddress;
+      } else {
+        // this.initAutocomplete();
+
+      }
+    }, (error) => {
+      this.presentAlert('some went restart the app');
+      this.router.navigate(['/login']);
+
+    });
+  }
+
+
+  async presentAlert(mesg) {
+    const alert = await this.alertController.create({
+      header: 'ERROR',
+      // subHeader: 'Subtitle',
+      message: mesg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
   // tslint:disable-next-line: use-lifecycle-interface
   async ngAfterViewInit() {
     // this.loadMap();
@@ -82,8 +138,8 @@ export class GooglemapPage implements OnInit {
         // scaleControl: false,
         fullscreenControl: false
       };
-
       this.initAutocomplete();
+
     }, (err) => {
       console.log(err);
 
@@ -117,6 +173,7 @@ export class GooglemapPage implements OnInit {
     let markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
+    this.alertService.closeLoader();
     searchBox.addListener('places_changed', () => {
       this.restaurentDetails = [];
 
@@ -271,24 +328,45 @@ export class GooglemapPage implements OnInit {
 
 
 
-  gotoWelcomPage(val) {
-    console.log(val.value);
+  gotoWelcomPage() {
+    this.alertService.showLoader('Please Wait ...');
     // tslint:disable-next-line: no-string-literal
     this.restaurentDetails['customAddress'] = this.address;
     JSON.parse(JSON.stringify(this.restaurentDetails));
-    this.firestore.collection('Restaurent').add(JSON.parse(JSON.stringify(this.restaurentDetails))).then((docRef) => {
-      console.log('Document written with ID: ', docRef.id);
-      this.router.navigate(['/welcome'], { queryParams: { restaurent: docRef.id } });
 
-    }).catch((error) => {
-      // this.alertService.showInfoAlert('Error adding document: ');
+
+    // this.firestore.collection('Restaurent').add(JSON.parse(JSON.stringify(this.restaurentDetails))).then((docRef) => {
+    //   console.log('Document written with ID: ', docRef.id);
+    //   this.router.navigate(['/welcome'], { queryParams: { restaurent: docRef.id } });
+    // this.userDetail = JSON.parse(localStorage.getItem('user'));
+
+    this.SetUserData(this.userDetail).then(() => {
+      console.log(this.userDetail);
+
+      this.router.navigate(['/welcome'], { queryParams: { user: this.userDetail.uid } });
+      this.alertService.closeLoader();
+
+    }, (error) => {
       console.log(error);
-
+      this.alertService.closeLoader();
     });
+    // }).catch((error) => {
+    //   // this.alertService.showInfoAlert('Error adding document: ');
+    //   console.log(error);
+
+    // });
     // }
   }
 
+  SetUserData(userDetails) {
+    // const userDetails = JSON.parse(localStorage.getItem('user'));
+    this.userDetail['Restaurent'] = this.restaurentDetails;
+    const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${userDetails.uid}`);
 
+    return userRef.set(JSON.parse(JSON.stringify(this.userDetail)), {
+      merge: true
+    });
+  }
 
 
 

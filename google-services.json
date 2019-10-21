@@ -1,5 +1,3 @@
-
-
 {
   "project_info": {
     "project_number": "379506527122",
@@ -16,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "379506527122-8422prqimp8oivaisofr1s71127t6743.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flowfreak.crab",
+            "certificate_hash": "e31b25e7c59ecc980956b029a8890eebf1a79267"
+          }
+        },
         {
           "client_id": "379506527122-78g12ih6ad9onnl4v5ho1vb56469b2mb.apps.googleusercontent.com",
           "client_type": 3

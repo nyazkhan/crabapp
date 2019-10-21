@@ -157,6 +157,12 @@ ion-select{
 
 }
 
+.thanks {
+    transform: scale(2.2);
+    color: #c44829;
+
+}
+
 .menu-img{
     position: relative;
     .rm-btn{
@@ -167,3 +173,11 @@ ion-select{
         color: #ffeee0;
     }
 }
+
+.stylist-input{
+    border: 1px solid #f1d7d7;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--main-font-color);
+    margin-bottom: 20px;
+  }

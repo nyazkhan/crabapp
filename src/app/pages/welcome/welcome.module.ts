@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { WelcomePage } from './welcome.page';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    AngularFireAuthModule,
+
     RouterModule.forChild(routes)
   ],
   declarations: [WelcomePage]

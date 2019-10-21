@@ -18,7 +18,7 @@
 
   <div *ngIf="restaurentDetails.formatted_address" class="map-setting-part">
 
-    <form form #addressForm="ngForm">
+    <form #addressForm="ngForm">
 
       <p style="font-weight: bold;">{{restaurentDetails?.name}}</p>
 
@@ -27,7 +27,7 @@
 
       <br>
       <ion-item class="stylist-input" lines="none" color="undefine">
-        <ion-label slot="end">Premise No. / Name</ion-label>
+        <ion-label slot="end">Premise No</ion-label>
         <ion-input class="opacity-1" [ngModel]="address.address" name=" address">
         </ion-input>
       </ion-item>
@@ -68,7 +68,8 @@
       </ion-item> -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" color='undefine' (click)="gotoWelcomPage(addressForm)" class="full-with-btn  mt-20">SET
+          <ion-button expand="block" color='undefine' (click)="gotoWelcomPage()"
+            class="full-with-btn  mt-20">SET
             LOCATION</ion-button>
         </ion-col>
       </ion-row>

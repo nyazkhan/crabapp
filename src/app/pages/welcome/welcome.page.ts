@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { PhotoService } from 'src/app/service/photo.service';
+import { AlertService } from 'src/app/service/alert.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 declare const $: any;
 @Component({
   selector: 'app-welcome',
@@ -172,22 +174,27 @@ export class WelcomePage implements OnInit {
   };
   parking = true;
   restCapacity = 10;
+  restCost = 50;
   aboutRestaurent: string;
   active: any;
 
-  selectedDays: any;
+  // openOn: any;
   selectedDayTime: any = {};
+  userDetails: any = {};
+  email = '';
 
   constructor(
     public alertController: AlertController,
     public photoService: PhotoService,
-
+    @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
     @Inject(Router) private router: Router,
     @Inject(AngularFirestore) private firestore: AngularFirestore,
     @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
+    @Inject(AlertService) private alertService: AlertService,
 
   ) {
     this.subscribeRouteChanges();
+    this.alertService.showLoader('Loading...');
   }
 
   ngOnInit() {
@@ -217,7 +224,7 @@ export class WelcomePage implements OnInit {
 
         console.log(e);
 
-        this.RestaurentId = e.restaurent;
+        this.RestaurentId = e.user;
         this.getRestaurentById(this.RestaurentId);
 
 
@@ -227,13 +234,64 @@ export class WelcomePage implements OnInit {
 
   }
   getRestaurentById(id) {
-    this.firestore.collection('Restaurent').doc(id).get().subscribe(doc => {
+    this.firestore.collection('users').doc(id).get().subscribe(doc => {
+      this.alertService.closeLoader();
       console.log(doc.data());
-      this.restaurentDetail = doc.data();
+      this.userDetails = doc.data();
+      this.restaurentDetail = this.userDetails.Restaurent;
+
+      if (this.restaurentDetail.restType) {
+
+        this.restType = this.restaurentDetail.restType;
+      }
+
+      if (this.restaurentDetail.foodType) {
+
+        this.foodType = this.restaurentDetail.foodType;
+      }
+
+      if (this.restaurentDetail.paymentOption) {
+
+        this.paymentOption = this.restaurentDetail.paymentOption;
+      }
+
+      if ((this.restaurentDetail.parking === false) || (this.restaurentDetail.parking === true)) {
+
+        this.parking = this.restaurentDetail.parking;
+      }
+
+      if (this.restaurentDetail.aboutRestaurent) {
+
+        this.aboutRestaurent = this.restaurentDetail.aboutRestaurent;
+      }
+      if (this.userDetails.email) {
+
+        this.email = this.userDetails.email;
+      }
+      if (this.restaurentDetail.customOpencloseTimeing) {
+
+        this.openOn = this.restaurentDetail.customOpencloseTimeing;
+      }
+
+      if (this.restaurentDetail.restImg) {
+
+        this.photoService.photos = this.restaurentDetail.restImg;
+      }
+
+      if (this.restaurentDetail.restCost) {
+
+        this.restCost = this.restaurentDetail.restCost;
+      }
+      if (this.restaurentDetail.restCapacity) {
+
+        this.restCapacity = this.restaurentDetail.restCapacity;
+      }
 
     }, (error) => {
-      this.presentAlert('please select Restaurent Again');
+      this.alertService.showErrorAlert('please select Restaurent Again');
       this.router.navigate(['/googlemap']);
+      this.alertService.closeLoader();
+
 
     });
   }
@@ -263,6 +321,28 @@ export class WelcomePage implements OnInit {
     this.restaurentDetail['parking'] = this.parking;
     this.next();
   }
+
+  saveAboutRestaurent() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['aboutRestaurent'] = this.aboutRestaurent;
+    this.next();
+
+  }
+
+  SaveRestCapacity() {
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['restCapacity'] = this.restCapacity;
+    this.next();
+  }
+
+  saveCost() {
+
+    // tslint:disable-next-line: no-string-literal
+    this.restaurentDetail['restCost'] = this.restCost;
+    this.next();
+  }
+
+
   addClass(val) {
     // tslint:disable-next-line: object-literal-key-quotes
 
@@ -317,16 +397,13 @@ export class WelcomePage implements OnInit {
 
   // for day selection
   selectDays() {
-    this.selectedDays = this.openOn.filter(element => element.isOpen);
+    const days = this.openOn.filter(element => element.isOpen);
+
+    this.selectedDayTime = days[0];
     this.next();
   }
 
-  saveAboutRestaurent() {
-    // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['aboutRestaurent'] = this.aboutRestaurent;
-    this.next();
 
-  }
   sendDay(day) {
     delete this.selectedDayTime;
 
@@ -337,9 +414,12 @@ export class WelcomePage implements OnInit {
   setSametimeForAll(val) {
     if (!val) {
       // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < this.selectedDays.length; i++) {
-        this.selectedDays[i].open = this.selectedDayTime.open;
-        this.selectedDays[i].close = this.selectedDayTime.close;
+      for (let i = 0; i < this.openOn.length; i++) {
+        if (this.openOn[i].isOpen) {
+
+          this.openOn[i].open = this.selectedDayTime.open;
+          this.openOn[i].close = this.selectedDayTime.close;
+        }
 
       }
     }
@@ -349,13 +429,13 @@ export class WelcomePage implements OnInit {
   saveOpeningDaysANdTime() {
 
     // tslint:disable-next-line: no-string-literal
-    this.restaurentDetail['customOpencloseTimeing'] = this.selectedDays;
+    this.restaurentDetail['customOpencloseTimeing'] = this.openOn;
   }
 
 
   checkForRequiredFieldOnDay() {
     let er = 0;
-    this.selectedDays.forEach(element => {
+    this.openOn.forEach(element => {
       if ((element.isOpen)) {
         if (((element.open === '') || (element.close === ''))) {
           er++;
@@ -364,7 +444,7 @@ export class WelcomePage implements OnInit {
     });
 
     if (er > 0) {
-      this.presentAlert('Please Set Time For all Day');
+      this.alertService.showErrorAlert('Please Set Time For all Day');
 
     } else {
       this.next();
@@ -373,37 +453,117 @@ export class WelcomePage implements OnInit {
   }
   openTime(val) {
     if (val) {
-      this.selectedDays[this.curentDay].open = val;
+      this.openOn[this.curentDay].open = val;
 
     }
 
   }
   closeTime(val) {
     if (val) {
-      this.selectedDays[this.curentDay].close = val;
+      this.openOn[this.curentDay].close = val;
 
     }
 
   }
 
   showDetails() {
-    console.log(this.restaurentDetail);
-    this.firestore.collection('Restaurent').doc(this.RestaurentId).update(this.restaurentDetail);
+    this.alertService.showLoader('Please Wait Uploading Data ..');
 
-  }
-  // for Payment selection
+    this.SetUserData().then(() => {
+      this.next();
+      console.log('goto thanks page');
+      this.alertService.closeLoader();
+    }, (error) => {
+      this.alertService.closeLoader();
 
-
-  async presentAlert(mesg) {
-    const alert = await this.alertController.create({
-      header: 'ERROR',
-      // subHeader: 'Subtitle',
-      message: mesg,
-      buttons: ['OK']
     });
 
-    await alert.present();
+  }
+  saveImg() {
+    this.restaurentDetail['restImg'] = this.photoService.photos;
+    this.next();
   }
 
+  SetUserData() {
+
+    // const userDetails = JSON.parse(localStorage.getItem('user'));
+    this.userDetails.Restaurent = this.restaurentDetail;
+    const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${this.userDetails.uid}`);
+
+    return userRef.set(JSON.parse(JSON.stringify(this.userDetails)), {
+      merge: true
+    });
+  }
+
+  sendEmailVerifycatioLink() {
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be whitelisted in the Firebase Console.
+      url: 'https://crab-1.firebaseio.com/finishSignUp?cartId=1234',
+      // This must be true.
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: 'com.flowfreak.crab'
+      },
+      android: {
+        packageName: 'com.flowfreak.crab',
+        installApp: true,
+        minimumVersion: '12'
+      },
+      dynamicLinkDomain: 'example.page.link'
+    };
+
+    console.log(this.angularFire.auth.currentUser);
+    this.SetUserData().then(() => {
+      this.angularFire.auth.currentUser.updateEmail(this.email)
+        .then(() => {
+          this.angularFire.auth.currentUser.sendEmailVerification().then(() => {
+            // The link was successfully sent. Inform the user.
+            // Save the email locally so you don't need to ask the user for it again
+            // if they open the link on the same device.
+            // const win = window.open('https://gmail.com/mail', '_blank');
+            // win.focus();
+            this.alertService.showInfoAlert('Email Verifycation Link send');
+            this.next();
+            // window.localStorage.setItem('emailForSignIn', email);
+          }, (error) => {
+            this.alertService.showInfoAlert(error.message);
+
+          });
+
+        })
+        .catch((error) => {
+          this.alertService.showInfoAlert(error.message);
+          this.logOut();
+          // Some error occurred, you can inspect the code: error.code
+        });
+    }, (error) => {
+      this.alertService.showErrorAlert(error);
+    });
+  }
+
+
+  isValidEmail() {
+    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    if (reg.test(this.email) == false) {
+      // alert('Invalid Email Address');
+      return false;
+    }
+
+    return true;
+
+  }
+
+
+  logOut() {
+    this.angularFire.auth.signOut().then(() => {
+      // Sign-out successful.
+      this.router.navigate(['/login']);
+    }).catch((error) => {
+      // An error happened.
+      this.alertService.showErrorAlert(error);
+    });
+  }
 
 }
