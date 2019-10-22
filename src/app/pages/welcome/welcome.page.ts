@@ -13,7 +13,7 @@ declare const $: any;
 })
 export class WelcomePage implements OnInit {
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
-
+  sameTimeForAll: boolean;
   curentDay = 0;
 
 
@@ -380,7 +380,7 @@ export class WelcomePage implements OnInit {
       this.foodType.both = false;
       this.foodType.jain = false;
       console.log(this.foodType);
-            // tslint:disable-next-line: object-literal-key-quotes
+      // tslint:disable-next-line: object-literal-key-quotes
       $('#vegColor').css({ 'backgroundColor': '#f4433630' });
 
       return;
@@ -391,7 +391,7 @@ export class WelcomePage implements OnInit {
       this.foodType.nonVeg = false;
       this.foodType.both = true;
       console.log(this.foodType);
-            // tslint:disable-next-line: object-literal-key-quotes
+      // tslint:disable-next-line: object-literal-key-quotes
       $('#vegColor').css({ 'backgroundColor': '#f7faba61' });
 
       return;
@@ -593,7 +593,7 @@ export class WelcomePage implements OnInit {
   }
 
   gotoGoogleMap() {
-    this.router.navigate(['/googlemap'], { queryParams: { user: this.RestaurantId} });
+    this.router.navigate(['/googlemap'], { queryParams: { user: this.RestaurantId } });
 
   }
 

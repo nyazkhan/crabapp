@@ -23,8 +23,8 @@
       <br>
       <br>
 
-      <ion-row *ngIf="restaurantDetail.name">
-        <ion-col padding>
+      <ion-row>
+        <ion-col class="ion-padding">
           <h6 class="main-color bold ion-text-left" style="margin-bottom: 15px;">Restaurant name: </h6>
 
           <div class="full-border">
@@ -42,7 +42,7 @@
 
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="saveRestName()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -82,7 +82,7 @@
       </ion-row>
 
       <ion-row *ngIf="!foodType.nonVeg">
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Jain preparation available</ion-label>
             <ion-toggle class="ion-float-right" [(ngModel)]="foodType.jain" slot="end" name="jain" color="danger"
@@ -92,7 +92,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="saveFoodType()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -137,7 +137,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="saveRestType()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -172,7 +172,7 @@
       <br>
       <ion-row>
         <ion-col>
-          <ion-item-sliding padding>
+          <ion-item-sliding class="ion-padding">
             <ion-item lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:var(--main-font-color)">Cash</ion-label>
               <ion-toggle slot="end" [(ngModel)]="paymentOption.cash" name="cash" color="danger" checked></ion-toggle>
@@ -197,7 +197,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="savePaymentType()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -222,7 +222,7 @@
       <br>
       <ion-row>
         <ion-col>
-          <ion-item-sliding padding>
+          <ion-item-sliding class="ion-padding">
             <ion-item *ngFor="let days of openOn" lines="none" color="undefine" class="bot-border">
               <ion-label class="toggle-lable" style="color:var(--main-font-color)">{{days.day}}</ion-label>
               <ion-toggle slot="end" [(ngModel)]="days.isOpen" name="monday" color="danger" checked></ion-toggle>
@@ -256,7 +256,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="selectDays();" class="full-with-btn  mt-20">
               NEXT
@@ -282,7 +282,7 @@
 
       <h4 class="ion-text-center  main-color  ion-margin-bottom">Restaurant timing</h4>
       <br>
-      <div padding style="display:flex" class="all-content-center">
+      <div style="display:flex" class=" ion-padding all-content-center">
         <div *ngFor="let days of openOn; let i = index;">
           <ion-button *ngIf="days.isOpen" size="small" color="undefine" (click)=" sendDay(days); curentDay = i"
             [ngClass]="(curentDay ==i)?' day-square-btn day-active': 'day-square-btn'">
@@ -324,7 +324,7 @@
       <br>
 
       <ion-row *ngIf="((selectedDayTime.close)&&(selectedDayTime.open))">
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Same Timing For All Day</ion-label>
             <ion-toggle class="ion-float-right" [(ngModel)]="sameTimeForAll" (click)="setSametimeForAll(sameTimeForAll)"
@@ -336,7 +336,7 @@
       <br>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)=" checkForRequiredFieldOnDay(); "
               class="full-with-btn  mt-20">
@@ -374,7 +374,7 @@
       <br>
       <br>
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="text-with-right-toggle mt-20">
             <ion-label class="ion-float-left toggle-lable">Parking is available</ion-label>
             <ion-toggle class="ion-float-right" name="parking" [(ngModel)]="parking" slot="end" name="apple"
@@ -384,7 +384,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="saveParking()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -398,6 +398,7 @@
 
 
 
+  
 
 
     <!-- Accommodation size -->
@@ -422,13 +423,17 @@
 
       <br>
       <br>
-      <p *ngIf="(restCapacity == 10)">10 - 20 People at a time</p>
-      <p *ngIf="(restCapacity == 20)">20 - 30 People at a time</p>
-      <p *ngIf="(restCapacity == 30)">30 - 40 People at a time</p>
-      <p *ngIf="(restCapacity == 40)">40 - 50 People at a time</p>
-      <p *ngIf="(restCapacity == 50)">More then 50 People at a time</p>
-
-
+      <span *ngIf="(restCapacity == 10)">10 - 20 People at a time</span>
+      <span *ngIf="(restCapacity == 20)">20 - 30 People at a time</span>
+      <span *ngIf="(restCapacity == 30)">30 - 40 People at a time</span>
+      <span *ngIf="(restCapacity == 40)">40 - 50 People at a time</span>
+      <span *ngIf="(restCapacity == 50)">More then 50 People at a time</span>
+      <!-- {{restCapacity}}
+      <ion-item lines="none" color="undefine">
+        <ion-range min="10" max="50" step="10" [(ngModel)]="restCapacity" name="restCapacity" snaps color="danger">
+        </ion-range>
+      </ion-item> -->
+      <br> <br>
       <ion-item lines="none" color="undefine">
         <ion-range min="10" max="50" step="10" [(ngModel)]="restCapacity" name="restCapacity" snaps color="danger">
         </ion-range>
@@ -436,7 +441,7 @@
 
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="SaveRestCapacity()" class="full-with-btn  mt-20">
               NEXT
@@ -447,50 +452,73 @@
     </ion-slide>
 
 
+  <!-- Average cost per person -->
+  <ion-slide class="ion-padding " style=" vertical-align:top">
+    <div class="ion-float-left main-color">
+      <ion-icon (click)="previous()" name="arrow-back">
+      </ion-icon>
+    </div>
+
+    <h4 class="ion-text-center main-color  ion-margin-bottom">Average cost per person</h4>
+    <br>
+    <br>
+    <ion-row>
+      <ion-col class="ion-margin-top">
+        <div class="round-box" style="margin: auto">
+          <img class="img-veg" src="assets/crown.svg">
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <br>
+    <p>
+      <span style="font-size: 50px !important; font-weight: bold"> {{restCost}}</span><span
+        style="font-size: 12px !important;font-weight: normal;"> / per person</span>
+    </p>
+    <br>
+
+    <ion-item lines="none" color="undefine">
+      <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="restCost" snaps color="danger">
+      </ion-range>
+    </ion-item>
 
 
-    <!-- Average cost per person -->
-    <ion-slide class="ion-padding " style=" vertical-align:top">
-      <div class="ion-float-left main-color">
-        <ion-icon (click)="previous()" name="arrow-back">
-        </ion-icon>
+    <ion-row>
+      <ion-col class="ion-padding">
+        <div class="fixed-btn">
+          <ion-button expand="block" color='undefine' (click)="saveCost()" class="full-with-btn  mt-20">NEXT
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-slide>
+
+<!-- About your restaurant -->
+<ion-slide class="ion-padding " style=" vertical-align:top">
+  <div class="ion-float-left main-color">
+    <ion-icon (click)="previous()" name="arrow-back">
+    </ion-icon>
+
+  </div>
+
+  <h4 class="ion-text-center main-color ">About your restaurant</h4>
+  <br>
+  <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurant" name="aboutRestaurant"
+    class="main-color full-border" autofocus auto-grow="true"
+    placeholder=" We love restaurants as much as you do. That’s why we’ve been..."></ion-textarea>
+  <br>
+  <ion-row>
+    <ion-col class="ion-padding">
+      <div class="fixed-btn">
+        <ion-button expand="block" color='undefine' (click)="saveAboutRestaurant()" class="full-with-btn  mt-20">
+          NEXT
+        </ion-button>
       </div>
-
-      <h4 class="ion-text-center main-color  ion-margin-bottom">Average cost per person</h4>
-      <br>
-      <br>
-      <ion-row>
-        <ion-col class="ion-margin-top">
-          <div class="round-box" style="margin: auto">
-            <img class="img-veg" src="assets/crown.svg">
-          </div>
-        </ion-col>
-      </ion-row>
-
-      <br>
-      <br>
-      <br>
-      <p class="cost">
-        {{restCost}}<span style="font-size: 5px !important;font-weight: normal;"> / per person</span>
-      </p>
-      <br>
-
-      <ion-item lines="none" color="undefine">
-        <ion-range min="50" max="500" step="50" [(ngModel)]="restCost" name="restCost" snaps color="danger">
-        </ion-range>
-      </ion-item>
-
-
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="saveCost()" class="full-with-btn  mt-20">NEXT
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-
-    </ion-slide>
+    </ion-col>
+  </ion-row>
+</ion-slide>
 
 
 
@@ -520,7 +548,7 @@
         </ion-fab-button>
       </ion-fab>
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="saveImg()" class="full-with-btn  mt-20">NEXT
             </ion-button>
@@ -531,31 +559,7 @@
 
 
 
-    <!-- About your restaurant -->
-    <ion-slide class="ion-padding " style=" vertical-align:top">
-      <div class="ion-float-left main-color">
-        <ion-icon (click)="previous()" name="arrow-back">
-        </ion-icon>
-
-      </div>
-
-      <h4 class="ion-text-center main-color ">About your restaurant</h4>
-      <br>
-      <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurant" name="aboutRestaurant"
-        class="main-color full-border" autofocus auto-grow="true"
-        placeholder=" We love restaurants as much as you do. That’s why we’ve been..."></ion-textarea>
-      <br>
-      <ion-row>
-        <ion-col padding>
-          <div class="fixed-btn">
-            <ion-button expand="block" color='undefine' (click)="saveAboutRestaurant()" class="full-with-btn  mt-20">
-              NEXT
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-slide>
-
+    
 
 
     <ion-slide class="ion-padding " style=" vertical-align:top">
@@ -589,7 +593,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button *ngIf="!userDetails.emailVerified" expand="block" color='undefine'
               (click)="sendEmailVerifycatioLink()" [disabled]="!isValidEmail()" class="full-with-btn  mt-20"> Verify
@@ -630,7 +634,7 @@
 
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
 
             <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">NEXT
@@ -660,7 +664,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col padding>
+        <ion-col class="ion-padding">
           <div class="fixed-btn">
             <ion-button expand="block" color='undefine' (click)="logOut()" class="full-with-btn  mt-20">Log Out
             </ion-button>
