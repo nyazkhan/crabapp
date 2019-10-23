@@ -26,10 +26,10 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.main-background{
-    --background: #ffeee0;
+ion-content{
+    --background:url('/assets/theme_background.png') 0 0/100% 100% no-repeat ;
 }
-h1, h2, h3, h4, h5, h6, button, p{
+h1, h2, h3, h4, h5, h6, button, p, span{
     font-family: 'Roboto', sans-serif;
 }
 h6{
