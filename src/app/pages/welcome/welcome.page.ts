@@ -370,7 +370,7 @@ export class WelcomePage implements OnInit {
       this.foodType.both = false;
       console.log(this.foodType);
       // tslint:disable-next-line: object-literal-key-quotes
-      $('#vegColor').css({ 'backgroundColor': '#03fa033d' });
+      // $('#vegColor').css({ 'backgroundColor': '#03fa033d' });
 
       return;
     }
@@ -381,7 +381,7 @@ export class WelcomePage implements OnInit {
       this.foodType.jain = false;
       console.log(this.foodType);
       // tslint:disable-next-line: object-literal-key-quotes
-      $('#vegColor').css({ 'backgroundColor': '#f4433630' });
+      // $('#vegColor').css({ 'backgroundColor': '#f4433630' });
 
       return;
 
@@ -392,7 +392,7 @@ export class WelcomePage implements OnInit {
       this.foodType.both = true;
       console.log(this.foodType);
       // tslint:disable-next-line: object-literal-key-quotes
-      $('#vegColor').css({ 'backgroundColor': '#f7faba61' });
+      // $('#vegColor').css({ 'backgroundColor': '#f7faba61' });
 
       return;
 

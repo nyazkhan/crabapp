@@ -17,6 +17,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { IntroComponent } from './intro/intro.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 @NgModule({
   declarations: [AppComponent,
     IntroComponent],
@@ -24,6 +25,7 @@ import { IntroComponent } from './intro/intro.component';
   imports: [BrowserModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     IonicStorageModule.forRoot(),
     AngularFireAuthModule,
 
@@ -35,6 +37,7 @@ import { IntroComponent } from './intro/intro.component';
     CommanService,
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     FirebaseAuthentication,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
