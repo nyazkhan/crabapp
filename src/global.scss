@@ -26,9 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-ion-content{
-    --background:url('/assets/theme_background.png') 0 0/100% 100% no-repeat ;
-}
+// ion-content{
+//     --background:url('/assets/theme_background.png') 0 0/100% 100% no-repeat ;
+// }
 h1, h2, h3, h4, h5, h6, button, p, span{
     font-family: 'Roboto', sans-serif;
 }
@@ -45,4 +45,7 @@ p{
 }
 .main-color{
     color:var(--main-font-color) !important;
+}
+.main-light-color{
+    color:var(--light-font-color) !important;
 }
