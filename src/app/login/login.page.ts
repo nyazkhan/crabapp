@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, LoadingController, AlertController } from '@ionic/angular';
+import { ToastController, LoadingController, AlertController, IonSlides } from '@ionic/angular';
 // import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 // import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
@@ -30,27 +30,24 @@ export class LoginPage implements OnInit {
   varificationId: any;
   recaptchaVerifier: any;
 
-  // public recaptchaVerifier: firebase.auth.RecaptchaVerifier; recaptchaWidgetId: any;
   confirmationResult: firebase.auth.ConfirmationResult;
   isApp: boolean;
   otp: string;
   phone: string;
   code: string;
 
-  otpSend = false;
-  timmerCountOtp: number;
+
+  @ViewChild(IonSlides, { static: false }) slides: IonSlides;
+
   constructor(
     @Inject(AngularFireAuth) public angularFire: AngularFireAuth,
-    // @Inject(FirebaseAuthentication) public firebaseAuthentication: FirebaseAuthentication,
     @Inject(AlertService) private alertService: AlertService,
     @Inject(Router) private router: Router,
     private toastController: ToastController,
-    // public loadingController: LoadingController,
-    // public alertController: AlertController,
+
     @Inject(AngularFirestore) public afs: AngularFirestore,   // Inject Firestore service
   ) {
 
-    this.otpSend = false;
 
     this.angularFire.authState.subscribe((user) => {
       if (user) {
@@ -73,30 +70,18 @@ export class LoginPage implements OnInit {
 
   }
 
+  next() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true);
+  }
 
+  previous() {
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev();
+    this.slides.lockSwipes(true);
+  }
 
-
-  // login() {
-  //   const no = '+91' + this.phoneNo;
-  //   this.firebaseAuthentication.verifyPhoneNumber(no, 30000)
-  //     .then((varificationId) => {
-  //       this.varificationId = varificationId;
-  //       console.log(varificationId);
-  //       this.otpSend = true;
-  //       this.timeInterval();
-  //     }).catch((error) => {
-  //       this.otpSend = false;
-  //     });
-  // }
-
-  // signInWhitOTP() {
-  //   this.firebaseAuthentication.signInWithVerificationId(this.varificationId, this.otp).then((res) => {
-  //     // tslint:disable-next-line: no-unused-expression
-  //     this.router.navigate[('googlemap')];
-  //   }).catch((error) => {
-
-  //   });
-  // }
 
 
   phoneValidation() {
@@ -116,22 +101,9 @@ export class LoginPage implements OnInit {
     return null;
   }
 
-  resendOtp() {
-    this.router.navigate(['/googlemap']);
-  }
 
 
 
-  timeInterval() {
-    let timeleft = 0;
-    const downloadTimer = setInterval(() => {
-      this.timmerCountOtp = 0 + timeleft;
-      timeleft += 1;
-      if (timeleft >= 60) {
-        clearInterval(downloadTimer);
-      }
-    }, 1000);
-  }
   onSignInSubmit() {
     console.log('its call');
     this.alertService.showLoader('OTP sending..');
@@ -144,7 +116,7 @@ export class LoginPage implements OnInit {
         this.confirmationResult = confirmationResult;
         // const code = window.prompt('Please enter your code');
         // return confirmationResult.confirm(code);
-        this.otpSend = true;
+        this.next();
         this.alertService.closeLoader();
 
 
@@ -155,7 +127,7 @@ export class LoginPage implements OnInit {
 
         // appVerifier.verify();
         appVerifier.reset();
-        this.otpSend = false;
+        this.previous();
         this.alertService.showErrorAlert(error.code);
         console.log(error);
         // this.router.navigate(['/login']);
@@ -225,29 +197,12 @@ export class LoginPage implements OnInit {
 
 
   }
-  async presentToast(Message, showbutton, Position, Duration) {
-    const toast = await this.toastController.create({
-      message: Message,
-      showCloseButton: showbutton,
-      position: Position,
-      duration: Duration
-    });
-    toast.present();
-  }
+ 
   ngOnInit() {
 
   }
 
-  // async presentAlert(mesg) {
-  //   const alert = await this.alertController.create({
-  //     header: 'ERROR',
-  //     // subHeader: 'Subtitle',
-  //     message: mesg,
-  //     buttons: ['OK']
-  //   });
 
-  //   await alert.present();
-  // }
 
 
 
@@ -260,8 +215,5 @@ export class LoginPage implements OnInit {
     });
   }
 
-  // tslint:disable-next-line: use-lifecycle-interface
-  ngOnDestroy() {
-    this.otpSend = false;
-  }
+ 
 }
