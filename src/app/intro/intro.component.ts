@@ -113,5 +113,4 @@ export class IntroComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  
 }
