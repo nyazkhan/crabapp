@@ -1,104 +1,78 @@
 import { Injectable } from '@angular/core';
-import swal, { SweetAlertType } from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
+
+  loading: any;
+  isLoading = false;
+
   constructor(
+    public alertController: AlertController,
+    public loader: LoadingController,
+    public toastController: ToastController
   ) { }
 
-  showInfoAlert(mesg: string) {
-    swal.fire(mesg);
-
-  }
-  showSuccessAlert(msg: string) {
-    swal.fire({
-      type: 'success',
-      title: 'Success',
-      text: msg,
-    });
-  }
-
-  showErrorAlert(msg: string) {
-    swal.fire({
-      text: msg || 'error',
-    });
-  }
-
-  /**used to show a btn(not 'OK') with alert to execute some task */
-  showErrorAlertWithBtn(msg: string, btnText: string, clbk: Function) {
-    return swal.fire({
-      text: msg,
-      confirmButtonText: btnText,
-      preConfirm: () => clbk(),
-      allowOutsideClick: false
-    });
-  }
-
-  /**used to show a btn(not 'OK') and cancel with alert to execute some task */
-  showErrorAlertWithTwoBtn(msg: string, btnText: string) {
-    return swal.fire({
-      text: msg,
-      confirmButtonText: btnText,
-      showCancelButton: true,
-      //  preConfirm: () => clbk(),
-      //  allowOutsideClick: false
-    });
-  }
-
-  showSuccessToast(msg: string, type?: SweetAlertType) {
-    return swal.fire({
-      type: type || 'success',
-      title: msg,
-      position: 'top',
-      showConfirmButton: false,
-      timer: 1500
+  async showErrorAlert(msg: any) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: msg,
+      buttons: ['OK']
     });
 
+    await alert.present();
   }
 
-  /**
-   * Prompts user a confirmation pop-up. Sends some request on confirm button and returns its response to
-   * asynchronously
-   */
-  // tslint:disable-next-line:max-line-length
-  confirmWithLoader(request: Observable<any>, Type: SweetAlertType, msg: string, text: string, cnfrmBtnText = 'Yes, Delete !', cnfrmBtnColor = '#d33') {
-    return swal.fire({
-      title: msg,
-      type: Type,
-      text: text || '',
-      showCancelButton: true,
-      confirmButtonText: cnfrmBtnText,
-      confirmButtonColor: cnfrmBtnColor,
-      cancelButtonColor: '#3085d6',
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        return new Promise((resolve, reject) => {
 
-          request.subscribe(
-            (res: any) => resolve(res),
-            (err: any) => reject(err)
-          );
-        });
-      },
-      allowOutsideClick: () => !swal.isLoading()
+
+
+
+  async showInfoAlert(msg: string) {
+    const confrm = await this.alertController.create({
+      header: 'Success',
+      message: msg,
     });
+
+    await confrm.present();
   }
 
-  showLoader(msg: string) {
-    swal.fire({
-      title: 'Please wait...',
-      html: msg,
-      allowOutsideClick: () => !swal.isLoading(),
-      onOpen: () => {
-        swal.showLoading();
-      },
+
+
+  async showLoader(text?: string) {
+    console.log('show loder');
+    this.isLoading = true;
+    // this.loading = await this.loader.create({
+    //   message: text || '',
+
+    // });
+    // return await this.loading.present().then(() => {
+    //   console.log('presented');
+    //   if (!this.isLoading) {
+    //    this.loading.dismiss().then(() => console.log('abort presenting'));
+    //   }
+    // });
+    return await this.loader.create({
+      message: text || '',
+  }).then(a => {
+      a.present().then(() => {
+        console.log('presented');
+        if (!this.isLoading) {
+          a.dismiss().then(() => console.log('abort presenting'));
+        }
+      });
     });
+
   }
 
-  closeLoader() {
-    swal.close();
+
+  async closeLoader() {
+    console.log('hide it');
+    this.isLoading = false;
+
+    return await this.loader.dismiss();
+    // this.loading.dismiss();
+
   }
 }
 

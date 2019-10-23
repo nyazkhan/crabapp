@@ -45,8 +45,8 @@ export class LoginPage implements OnInit {
     @Inject(AlertService) private alertService: AlertService,
     @Inject(Router) private router: Router,
     private toastController: ToastController,
-    public loadingController: LoadingController,
-    public alertController: AlertController,
+    // public loadingController: LoadingController,
+    // public alertController: AlertController,
     @Inject(AngularFirestore) public afs: AngularFirestore,   // Inject Firestore service
   ) {
 
@@ -214,7 +214,7 @@ export class LoginPage implements OnInit {
       {
         size: 'invisible', callback: () => {
           // reCAPTCHA solved, allow signInWithPhoneNumber.
-          this.onSignInSubmit();
+          // this.onSignInSubmit();
         }, 'expired-callback': () => {
           // Response expired. Ask user to solve reCAPTCHA again.
           // ...
@@ -238,16 +238,16 @@ export class LoginPage implements OnInit {
 
   }
 
-  async presentAlert(mesg) {
-    const alert = await this.alertController.create({
-      header: 'ERROR',
-      // subHeader: 'Subtitle',
-      message: mesg,
-      buttons: ['OK']
-    });
+  // async presentAlert(mesg) {
+  //   const alert = await this.alertController.create({
+  //     header: 'ERROR',
+  //     // subHeader: 'Subtitle',
+  //     message: mesg,
+  //     buttons: ['OK']
+  //   });
 
-    await alert.present();
-  }
+  //   await alert.present();
+  // }
 
 
 

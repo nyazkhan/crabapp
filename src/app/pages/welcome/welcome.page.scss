@@ -6,7 +6,6 @@ ion-slides{
 ion-slide{
     padding-top: 30px;
     display: block;
-    -background-color: #ffeee0;
 }
 ion-slide.swiper-slide {
     align-items: flex-start;
@@ -38,15 +37,15 @@ ion-button.full-with-btn{
 
 .round-box{
     // -border:1px solid var(--main-white-color);
-    height: 170px;
-    width: 170px;
-    background-color: var(--main-white-color);
-    border-radius: 50%;
-    box-shadow:0 0 0px 30px #fff8f1;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
+    // height: 170px;
+    // width: 170px;
+    // background-color: var(--main-white-color);
+    // border-radius: 50%;
+    // box-shadow:0 0 0px 30px #fff8f1;
+    // position: relative;
+    // overflow: hidden;
+    // display: flex;
+    // justify-content: center;
 }
 // .round-box-dark{
 //     height: 210px;

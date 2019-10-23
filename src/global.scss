@@ -27,7 +27,13 @@
 
 
 .main-background{
-    --background: #ffeee0;
+    // background: #ffffff;
+   --background: url('/assets/background.png') 0 0/100% 100% no-repeat ; 
+//    max-width: 100vw;
+//    max-height: 100vh; 
+//    -webkit-background-size: cover;
+//     -moz-background-size: cover;
+//     background-size: cover;
 }
 h1, h2, h3, h4, h5, h6, button, p{
     font-family: 'Roboto', sans-serif;
