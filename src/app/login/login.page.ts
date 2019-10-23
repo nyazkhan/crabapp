@@ -1,20 +1,19 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController, AlertController, IonSlides } from '@ionic/angular';
-// import { AngularFireAuth } from '@angular/fire/auth';
+import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 // import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AlertService } from '../service/alert.service';
-import { ThrowStmt } from '@angular/compiler';
 
 export interface User {
   uid: string;
 
   phone: number;
   email: string;
-  emailVerified: string
+  emailVerified: string;
 }
 @Component({
   selector: 'app-login',
@@ -36,7 +35,7 @@ export class LoginPage implements OnInit {
   phone: string;
   code: string;
 
-
+  UserId: string;
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
   constructor(
@@ -44,6 +43,7 @@ export class LoginPage implements OnInit {
     @Inject(AlertService) private alertService: AlertService,
     @Inject(Router) private router: Router,
     private toastController: ToastController,
+    private storage: Storage,
 
     @Inject(AngularFirestore) public afs: AngularFirestore,   // Inject Firestore service
   ) {
@@ -51,14 +51,12 @@ export class LoginPage implements OnInit {
 
     this.angularFire.authState.subscribe((user) => {
       if (user) {
-        // User is signed in.
-        console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        this.router.navigate(['/googlemap'], { queryParams: { user: user.uid } });
+
+        this.storage.set('user', JSON.stringify(user));
+        // this.router.navigate(['/googlemap'], { queryParams: { user: user.uid } });
 
       } else {
-        localStorage.setItem('user', null);
-
+        this.storage.set('user', null);
       }
 
     }, (error) => {
@@ -106,6 +104,7 @@ export class LoginPage implements OnInit {
 
   onSignInSubmit() {
     console.log('its call');
+    
     this.alertService.showLoader('OTP sending..');
     const appVerifier = this.recaptchaVerifier;
     const no = '+91' + this.phoneNo;
@@ -127,7 +126,7 @@ export class LoginPage implements OnInit {
 
         // appVerifier.verify();
         appVerifier.reset();
-        this.previous();
+        // this.previous();
         this.alertService.showErrorAlert(error.code);
         console.log(error);
         // this.router.navigate(['/login']);
@@ -150,7 +149,11 @@ export class LoginPage implements OnInit {
       this.SetUserData(result.user).then(() => {
         this.alertService.closeLoader();
 
-        this.router.navigate(['/googlemap'], { queryParams: { user: result.user.uid } });
+        this.storage.set('user', result.user);
+
+        this.next();
+        this.UserId = result.user.uid;
+        // this.router.navigate(['/googlemap'], { queryParams: { user: result.user.uid } });
       });
       // ...
 
@@ -197,11 +200,14 @@ export class LoginPage implements OnInit {
 
 
   }
- 
+
   ngOnInit() {
 
   }
+  goToMap() {
+    this.router.navigate(['/googlemap'], { queryParams: { user: this.UserId } });
 
+  }
 
 
 
@@ -215,5 +221,5 @@ export class LoginPage implements OnInit {
     });
   }
 
- 
+
 }
