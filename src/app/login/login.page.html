@@ -1,18 +1,20 @@
 <ion-content class="main-background">
 
 
-  <div class="main ion-no-margin" style="background-color: #ffeee0;">
+  <div class="main ion-no-margin" >
     <ion-row *ngIf="!otpSend"  class=" ion-padding ion-no-margin">
       <ion-col class="ion-padding " >
-
         <ion-row>
           <ion-col class="fire-logo">
 
-            <h1 style="font-size: xx-large" class=" btn-color ion-no-margin ion-text-center ion-margin-vertical"
+            <h1 style="font-size: xx-large" class="  ion-no-margin ion-text-center ion-margin-vertical"
               style="margin: 0 !important;">
               Welcome to CRAB</h1>
 
-            <img src="assets/welcome.png" class="img-logo">
+            <!-- <img src="assets/welcome.png" class="img-logo"> -->
+<br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
 
             <p style="font-size: 18px !important" class="ion-text-center bold">Create A New Account / Login</p>
 
@@ -60,7 +62,6 @@
 
     <ion-row *ngIf="otpSend"  class=" ion-padding row login-screen">
       <div  class=" ion-padding login-screen-content">
-        <!-- <ion-text class="ion-text-left" > -->
 
         <p class="bold">OTP recive on</p>
         <ion-row>
@@ -69,7 +70,6 @@
               <span style="float: right;" class="btn-color" (click)="otpSend= false">Change</span></ion-text>
           </ion-col>
         </ion-row>
-        <!-- </ion-text> -->
 
         <br>
         <br>
@@ -89,26 +89,11 @@
         <br>
 
 
-        <!-- <ion-row>
-          <ion-col>
-            <ion-input clearInput type="tel" placeholder="Mobile No" [(ngModel)]="phoneNo"
-              class="input ion-margin-vertical ion-padding-horizontal" clear-input="true">
-              <ion-icon size="large" color="undefine" style="color: #996452" name="phone-portrait"></ion-icon>
-            </ion-input>
-          </ion-col>
-        </ion-row> -->
+   
         <ion-item class="stylist-input" lines="none" color="undefine">
           <ion-label slot="end">OTP</ion-label>
           <ion-input class="opacity-1" [(ngModel)]="otp" name="otp" placeholder="OTP"></ion-input>
         </ion-item>
-
-        <!-- <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="login()" color="undefined" class="transition">
-              <strong class="white">
-                Send OTP</strong></ion-button>
-          </ion-col>
-        </ion-row> -->
         <ion-row>
           <ion-col>
             <ion-button expand="block" (click)="otpSummit()" color='undefine' class="full-with-btn  mt-20 transition">
@@ -123,10 +108,6 @@
         <br>
         <ion-row>
           <ion-col>
-            <!-- <ion-text class="block btn-color"><span class="ion-float-left" style="font-size: 13px;">OTP will expire in
-                {{timmerCountOtp}} seconds</span>
-              <span style="float: right;" class="bold btn-color" (click)="resendOtp()"><img src="assets/refresh.svg"
-                  class="img-logo"> RESEND OTP</span></ion-text> -->
           </ion-col>
         </ion-row>
       </div>

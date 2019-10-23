@@ -8,7 +8,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ErrorComponent } from './error/error.component';
 import { CommanService } from './service/comman.service';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -17,9 +16,10 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { IntroComponent } from './intro/intro.component';
 @NgModule({
   declarations: [AppComponent,
-    ErrorComponent],
+    IntroComponent],
   entryComponents: [],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(environment.config),
