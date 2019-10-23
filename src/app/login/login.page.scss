@@ -41,7 +41,14 @@
   //   display: block;
   //   font-weight: bold;
   // }
-
+  ion-slides{
+    height: 100vh !important;
+}
+ion-slide{
+    padding-top: 20px;
+    display: block;
+    background:url('/assets/theme_background.png') 0 0/100% 85% no-repeat ;
+}
   .btn-color {
       color: var(--main-font-color);
     }
@@ -76,4 +83,10 @@
     display: flex;
     justify-content: center;
     align-items: center !important;
+}
+.success-text{
+  color: #1AAE29 !important;
+}
+.image-box{
+  border:1px solid red
 }
