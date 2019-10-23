@@ -43,7 +43,7 @@
   // }
 
   .btn-color {
-      color: #c44829;
+      color: var(--main-font-color);
     }
   .bold {
       font-weight: 500;
@@ -55,19 +55,20 @@
       height: 100vh;
     }
     ion-button.full-with-btn{
-      background-color: var(--main-white-font-color);
-      color: #fff;
+      background-color: var(--main-btn-background);
+      color: var(--main-white-font-color);
       font-size: 12px;
       height: 45px;
-      border: 1px solid var(--main-white-font-color);
+      // border: 1px solid var(--main-white-font-color);
       border-radius: 4px;
       width: 100%;
   }
   .stylist-input{
-    border: 1px solid #f1d7d7;
+    border: 1px solid var(--main-border-color);
     border-radius: 6px;
     font-size: 15px;
-    color: var(--main-white-font-color);
+    width: 100%;
+    color: var(--main-font-color);
     margin-bottom: 20px;
   }
   .opacity-1{--placeholder-opacity: 1  !important;}
