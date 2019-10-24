@@ -83,6 +83,7 @@ export class LoginPage implements OnInit {
 
 
   phoneValidation() {
+    this.slides.slideTo(2, 1000);
     const regExp = /^\d{9,11}$/;
     console.log(this.phoneNo);
 
@@ -205,7 +206,9 @@ export class LoginPage implements OnInit {
 
   }
   goToMap() {
-    this.router.navigate(['/googlemap'], { queryParams: { user: this.UserId } });
+    this.slides.slideTo(1, 1000);
+
+    // this.router.navigate(['/googlemap'], { queryParams: { user: this.UserId } });
 
   }
 

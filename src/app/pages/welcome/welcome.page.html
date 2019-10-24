@@ -2380,7 +2380,7 @@
 
     <!-- Restaurant timing -->
 
-    <ion-slide class="ion-padding " style=" vertical-align:top">
+    <!-- <ion-slide class="ion-padding " style=" vertical-align:top">
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -2457,7 +2457,7 @@
 
       </ion-row>
 
-    </ion-slide>
+    </ion-slide> -->
 
 
 
@@ -2887,7 +2887,7 @@
       <h2 class="bigbold" *ngIf="(restCapacity == 40)">30+ </h2>
       <p class="ion-text-center ion-margin-top light-font">People at a time</p>
       <ion-item lines="none" color="undefine">
-        <ion-range min="10" max="40" step="10" [(ngModel)]="restCapacity" name="restCapacity" snaps color="primary">
+        <ion-range min="10" max="40" step="10" [(ngModel)]="restCapacity" name="restCapacity" color="primary">
         </ion-range>
       </ion-item>
 
@@ -2923,6 +2923,8 @@
       </ion-row>
       <h6 class="ion-text-center bold main-color  ion-margin-bottom">Average cost per person</h6>
 
+      <br>
+
       <p>
         <span style="font-size: 50px !important; font-weight: bold"> {{restCost}}</span><span *ngIf="(restCost==1000)"
           style="font-size: 50px !important; font-weight: bold"> +</span>
@@ -2930,7 +2932,7 @@
       </p>
 
       <ion-item lines="none" color="undefine">
-        <ion-range min="50" max="1000" step="50" [(ngModel)]="restCost" name="restCost" snaps color="primary">
+        <ion-range min="50" max="1000" step="50" [(ngModel)]="restCost" name="restCost" color="primary">
         </ion-range>
       </ion-item>
 
@@ -2957,8 +2959,7 @@
       <h6 class="ion-text-center bold main-color ">About your restaurant</h6>
 
       <ion-textarea style="line-height: 26px;" [(ngModel)]="aboutRestaurant" name="aboutRestaurant"
-        class="main-color ion-text-left" autofocus auto-grow="true"
-        placeholder=" We love restaurants as much as you do."></ion-textarea>
+        class="main-color ion-text-left" autofocus auto-grow="true" placeholder="Say something nice ..."></ion-textarea>
 
       <ion-row>
         <ion-col class="ion-padding">
@@ -3007,6 +3008,100 @@
         </ion-col>
       </ion-row>
     </ion-slide> -->
+    
+    
+    <ion-slide style=" vertical-align:top">
+      <div class="ion-float-left main-color ion-padding">
+        <ion-icon (click)="previous()" name="arrow-back">
+        </ion-icon>
+      
+      </div>
+      <br>
+      <h6 class="ion-text-center  main-color ">Menu and restaurant img</h6>
+      <br>
+
+      <div class="ion-padding" style="height: 100%;overflow: scroll;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" class="menu-img" *ngFor="let photo of photoService.photos">
+            <button class="rm-btn" (click)="photoService.removePicture(photo.data)">
+              <span>&#10005;</span>
+            </button>
+            <img [src]="photo.data" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <p class="ion-text-left bold">Indoor Space</p>
+      <ion-row>
+        <ion-col size="4">
+          <div class="image-upload">
+              <img src="assets/image-ico.svg">
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="image-satup-box">
+              <button class="rm-btn" (click)="photoService.removePicture(photo.data)">
+                  <span>&#10005;</span>
+                </button>
+            <img src="assets/upi.png">
+          </div>
+        </ion-col>
+        <ion-col size="4">
+            <div class="image-satup-box">
+                <button class="rm-btn" (click)="photoService.removePicture(photo.data)">
+                    <span>&#10005;</span>
+                  </button>
+              <img src="assets/intro4.png">
+            </div>
+          </ion-col>
+      </ion-row>
+      <br>
+      <p class="ion-text-left bold">Outdoor Space</p>
+      <ion-row>
+        <ion-col size="4">
+            <div class="image-upload">
+                <img style="width:auto !important;" src="assets/image-ico.svg">
+            </div>
+        </ion-col>
+      </ion-row>
+      <br>
+      <p class="ion-text-left bold">Food</p>
+      <ion-row>
+        <ion-col size="4">
+            <div class="image-upload">
+                <img style="width:auto !important;" src="assets/image-ico.svg">
+            </div>
+        </ion-col>
+      </ion-row>
+      <br>
+      <p class="ion-text-left bold">Menu photo</p>
+      <ion-row>
+        <ion-col size="4">
+            <div class="image-upload">
+                <img src="assets/image-ico.svg">
+            </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentActionSheetForCamera()">
+          <ion-icon name="images"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <br>
+
+      <ion-row style="margin-bottom: 100px;">
+          <ion-col class="ion-padding">
+            <div class="all-content-center">
+              <ion-button expand="block" color='undefine' (click)="saveImg()" class="notfixedfullwithbtn">PROCEED
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
 
 
 
@@ -3066,7 +3161,6 @@
 
     <!-- email varification slide -->
     <ion-slide class="ion-padding " style=" vertical-align:top">
-
       <div class="ion-float-left main-color">
         <ion-icon (click)="previous()" name="arrow-back">
         </ion-icon>
@@ -3074,49 +3168,53 @@
       </div>
 
       <br>
-      <br>
-
-      <p class="bold ion-text-left">OTP recived on</p>
-      <ion-row>
-        <ion-col>
-          <ion-text class="block btn-color"><span class="ion-float-left"> {{email}}</span>
-            <span style="float: right;" class="btn-color" (click)="previous()">Change</span></ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col class="email-varify">
-
-
-          <img src="assets/otp.svg" class="img-logo">
+      <div class="ion-padding">
+        <p class="bold ion-text-left">Email ID Verification</p>
+        <ion-row>
+          <ion-col>
+            <ion-text class="block btn-color"><span class="ion-float-left"> {{email}}</span>
+              <span style="float: right;" class="link-btn" (click)="previous()">Change</span></ion-text>
+          </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+          <ion-col class="email-varify">
 
 
-
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="letsgodown">
-        <ion-col >
+            <img src="assets/otp.svg" class="img-logo" style="width: auto;">
 
 
 
-          <p style="font-size: 18px !important" class="ion-text-center bold">Please Verify Your Email ID</p>
-          <p style="font-size: 16px !important" class="ion-text-center ">We have sent you a link on</p>
-          <p style="font-size: 16px !important" class="ion-text-center bold">{{userDetails.email}}</p>
-          <p style="font-size: 12px !important" class="ion-text-center ">please click on that link to verify your email
-            id then open the app again</p>
+          </ion-col>
+        </ion-row>
 
-        </ion-col>
-      </ion-row>
+        <br>
 
-      <ion-row>
-        <ion-col class="ion-padding">
-          <div class="fixed-btn">
+        <!-- <ion-row class="letsgodown">
+          <ion-col> -->
 
-            <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">NEXT
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
+
+
+            <p style="font-size: 18px !important" class="ion-text-center bold">Please Verify Your Email ID</p>
+            <h6 class="ion-text-center main-light-color">We have sent you a link on</h6>
+            <h6 class="ion-text-center bold">{{userDetails.email}}</h6>
+            <h6 class="ion-text-center main-light-color">please click on that link to verify your
+              email
+              id then open the app again</h6>
+<!-- 
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row>
+          <ion-col>
+            <div class="fixed-btn">
+
+              <ion-button expand="block" color='undefine' (click)="next()" class="full-with-btn  mt-20">NEXT
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
     </ion-slide>
 
 
@@ -3124,7 +3222,7 @@
     <!-- thankyou  -->
     <ion-slide class="ion-padding thankyou-img " style=" vertical-align:top">
       <ion-row class="letsgodown">
-        <ion-col >
+        <ion-col>
 
           <h1 style="font-size: xx-large" class="main-color btn-color ion-no-margin ion-text-center ion-margin-vertical"
             style="margin: 0 !important;">

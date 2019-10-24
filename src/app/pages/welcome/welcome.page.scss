@@ -38,6 +38,15 @@ ion-button.full-with-btn{
     width: 85%;
     letter-spacing: 1px;
 }
+ion-button.notfixedfullwithbtn{
+    background-color: var(--main-btn-background);
+    color:var(--main-white-font-color);
+    font-size: 14px;
+    height: 45px;
+    border-radius: 4px;
+    width: 100%;
+    letter-spacing: 1px;
+}
 .bold {
     font-weight: 500;
   }
@@ -160,16 +169,14 @@ ion-select{
 
 
 
-.menu-img{
-    position: relative;
     .rm-btn{
         position: absolute;
         right: 5px;
+        top: 5px;
         padding: 5px;
-        background: var(--main-font-color);
+        background: var(--ion-color-danger);
         color:  var(--main-white-font-color);
     }
-}
 
 .stylist-input{
     border: 1px solid var(--main-border-color);
@@ -356,4 +363,45 @@ transition : all 1200ms;
 }
 .parking-on #crossme{
     display: none;
+}
+.link-btn{
+    color: var(--ion-color-primary);
+    text-decoration: underline;
+  }
+  .image-upload{
+    -border:1px solid var(--main-border-color) !important;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+   -height: 120px;
+    display: flex;
+    width:100%;
+}
+.image-upload img{
+    height: 100% !important;
+    width: 100% !important;
+    background-size: cover;
+    overflow: hidden;
+}
+.image-satup-box{
+    border:1px solid var(--main-border-color) !important;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+   -height: 120px;
+    display: flex;
+    width:100%;
+}
+.image-satup-box img{
+    height: 100% !important;
+    width: 100% !important;
+    background-size: cover;
+    overflow: hidden;
+}
+ion-range{
+    --bar-height: 10px !important;
+    --knob-size: 32px !important;
+    --bar-border-radius: 50px !important;
 }
